@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.COMP3330Project">
         <activity
-            android:name=".IntroActivity"
+            android:name=".HomeActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
