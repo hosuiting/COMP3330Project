@@ -40,6 +40,13 @@ public class CaloriesCalActivity extends AppCompatActivity {
         fish_amount = (EditText) findViewById(R.id.fish_amount);
         vege_amount = (EditText) findViewById(R.id.vege_amount);
         carbs_amount = (EditText) findViewById(R.id.carbs_amount);
+        beef_amount.setVisibility(View.GONE);
+        pork_amount.setVisibility(View.GONE);
+        chicken_amount.setVisibility(View.GONE);
+        fish_amount.setVisibility(View.GONE);
+        vege_amount.setVisibility(View.GONE);
+        carbs_amount.setVisibility(View.GONE);
+
 
 
 
@@ -47,6 +54,37 @@ public class CaloriesCalActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 beef_amount.setVisibility(View.VISIBLE);
+            }
+        });
+        pork_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pork_amount.setVisibility(View.VISIBLE);
+            }
+        });
+        chicken_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chicken_amount.setVisibility(View.VISIBLE);
+            }
+        });
+
+        fish_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fish_amount.setVisibility(View.VISIBLE);
+            }
+        });
+        vege_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vege_amount.setVisibility(View.VISIBLE);
+            }
+        });
+        carbs_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                carbs_amount.setVisibility(View.VISIBLE);
             }
         });
     }

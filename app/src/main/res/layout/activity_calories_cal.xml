@@ -30,11 +30,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView12"
+                    android:id="@+id/imageView19"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
-                    android:layout_weight="0.33"
-                    tools:srcCompat="@drawable/beef" />
+                    android:layout_weight="0.3"
+                    app:srcCompat="@drawable/beef" />
 
                 <ImageView
                     android:id="@+id/imageView14"
@@ -153,78 +153,174 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/beef_amount"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="0.4"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Beef(g)"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                tools:visibility="gone" />
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/pork_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10sp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="pork(g)"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                tools:visibility="gone" />
+                <EditText
+                    android:id="@+id/beef_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:hint="Beef(g)"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/chicken_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10sp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="chicken(g)"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                tools:visibility="gone" />
+                <TextView
+                    android:id="@+id/beef_kcal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="kcal: 0"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/fish_amount"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10sp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="fish(g)"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                tools:visibility="gone" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/vege_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10sp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="vegetables(g)"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                tools:visibility="gone" />
+                <EditText
+                    android:id="@+id/pork_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:hint="pork(g)"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/carbs_amount"
+                <TextView
+                    android:id="@+id/pork_kcal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="kcal: 0"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10sp"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Carbohydrates (g)"
-                android:textAlignment="center"
-                android:textSize="20sp"
-                tools:visibility="gone" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/chicken_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:hint="chicken(g)"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/chicken_kcal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="kcal: 0"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/fish_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:hint="fish(g)"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/fish_kcal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="kcal: 0"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/vege_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:hint="vegetables(g)"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/vege_kcal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="kcal: 0"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/carbs_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:layout_weight="0.5"
+                    android:ems="10"
+                    android:hint="carbohydrates (g)"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/carbs_kcal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:text="kcal: 0"
+                    android:textAllCaps="false"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
