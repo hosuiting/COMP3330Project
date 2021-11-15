@@ -163,7 +163,8 @@
                 android:inputType="textPersonName"
                 android:text="Beef(g)"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:visibility="gone" />
 
             <EditText
                 android:id="@+id/pork_amount"
@@ -174,7 +175,8 @@
                 android:inputType="textPersonName"
                 android:text="pork(g)"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:visibility="gone" />
 
             <EditText
                 android:id="@+id/chicken_amount"
@@ -186,7 +188,7 @@
                 android:text="chicken(g)"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                tools:visibility="visible" />
+                tools:visibility="gone" />
 
             <EditText
                 android:id="@+id/fish_amount"
@@ -197,10 +199,11 @@
                 android:inputType="textPersonName"
                 android:text="fish(g)"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:visibility="gone" />
 
             <EditText
-                android:id="@+id/vegetables_amount"
+                android:id="@+id/vege_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
@@ -208,7 +211,8 @@
                 android:inputType="textPersonName"
                 android:text="vegetables(g)"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:visibility="gone" />
 
             <EditText
                 android:id="@+id/carbs_amount"
@@ -219,7 +223,8 @@
                 android:inputType="textPersonName"
                 android:text="Carbohydrates (g)"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                tools:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
