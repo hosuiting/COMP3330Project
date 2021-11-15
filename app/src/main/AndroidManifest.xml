@@ -10,7 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.COMP3330Project">
         <activity
+<<<<<<< Updated upstream
             android:name=".NutrientsActivity"
+=======
+            android:name=".CaloriesCalActivity"
+>>>>>>> Stashed changes
             android:exported="true" />
         <activity
             android:name=".ArticleActivity"
