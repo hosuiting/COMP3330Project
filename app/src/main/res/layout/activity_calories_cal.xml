@@ -166,7 +166,7 @@
                     android:layout_weight="0.5"
                     android:ems="10"
                     android:hint="Beef(g)"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -176,7 +176,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="kcal: 0"
+                    android:text="kcal: 0.0"
                     android:textAllCaps="false"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -194,7 +194,7 @@
                     android:layout_weight="0.5"
                     android:ems="10"
                     android:hint="pork(g)"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -204,7 +204,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="kcal: 0"
+                    android:text="kcal: 0.0"
                     android:textAllCaps="false"
                     android:textSize="20sp" />
 
@@ -223,7 +223,7 @@
                     android:layout_weight="0.5"
                     android:ems="10"
                     android:hint="chicken(g)"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -233,7 +233,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="kcal: 0"
+                    android:text="kcal: 0.0"
                     android:textAllCaps="false"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -251,7 +251,7 @@
                     android:layout_weight="0.5"
                     android:ems="10"
                     android:hint="fish(g)"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -261,7 +261,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="kcal: 0"
+                    android:text="kcal: 0.0"
                     android:textAllCaps="false"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -279,7 +279,7 @@
                     android:layout_weight="0.5"
                     android:ems="10"
                     android:hint="vegetables(g)"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -289,7 +289,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="kcal: 0"
+                    android:text="kcal: 0.0"
                     android:textAllCaps="false"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -307,7 +307,7 @@
                     android:layout_weight="0.5"
                     android:ems="10"
                     android:hint="carbohydrates (g)"
-                    android:inputType="textPersonName"
+                    android:inputType="numberDecimal"
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -317,7 +317,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:gravity="center"
-                    android:text="kcal: 0"
+                    android:text="kcal: 0.0"
                     android:textAllCaps="false"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -332,18 +332,20 @@
 
                 <TextView
                     android:id="@+id/total_cal_text"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:text="Total Calories"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/kcal_text"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/total_kcal"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:text="0kcal"
+                    android:textAlignment="textEnd"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
