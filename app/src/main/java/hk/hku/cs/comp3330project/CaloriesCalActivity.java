@@ -38,7 +38,7 @@ public class CaloriesCalActivity extends AppCompatActivity {
     private TextView carbs_kcal_text;
     private double total_kcal;
     private TextView total_kcal_text;
-
+    private Button calores_cal_done_button;
 
 
     @Override
@@ -76,7 +76,7 @@ public class CaloriesCalActivity extends AppCompatActivity {
         vege_kcal_text.setVisibility(View.GONE);
         carbs_kcal_text.setVisibility(View.GONE);
         total_kcal_text = (TextView) findViewById(R.id.total_kcal);
-
+        calores_cal_done_button = (Button) findViewById(R.id.calories_cal_done_button);
         beef_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -245,6 +245,15 @@ public class CaloriesCalActivity extends AppCompatActivity {
                 }
                 total_kcal=beef_kcal+pork_kcal+chicken_kcal+fish_kcal+vege_kcal+carbs_kcal;
                 total_kcal_text.setText(String.format("%.2f",total_kcal)+" kcal");
+            }
+        });
+        calores_cal_done_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(CaloriesCalActivity.this,DailyCaloriesActivity.class);
+                i.putExtra("time","breakfast");
+                i.putExtra("calories",total_kcal);
+                startActivity(i);
             }
         });
     }
