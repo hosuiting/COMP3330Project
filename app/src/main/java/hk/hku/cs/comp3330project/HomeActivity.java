@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class HomeActivity extends AppCompatActivity {
     private Button toCaloriesCal;
+    private Button toChatroom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +19,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this,CaloriesCalActivity.class));
+            }
+        });
+        toChatroom=(Button) findViewById(R.id.goChatroom);
+        toChatroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this,ChatroomActivity.class));
             }
         });
 
