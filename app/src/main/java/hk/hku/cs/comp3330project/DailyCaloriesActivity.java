@@ -2,8 +2,12 @@ package hk.hku.cs.comp3330project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,10 +29,16 @@ public class DailyCaloriesActivity extends AppCompatActivity {
     private double dinner_kcal_value;
     private double total_kcal_value;
     private double additional_kcal_value;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_calories);
+        SharedPreferences mydata = getSharedPreferences("mydata", Context.MODE_PRIVATE);
+        breakfast_kcal_value=Double.longBitsToDouble(mydata.getLong("breakfast",0));
+        lunch_kcal_value=Double.longBitsToDouble(mydata.getLong("lunch",0));
+        dinner_kcal_value=Double.longBitsToDouble(mydata.getLong("dinner",0));
+        additional_kcal_value=Double.longBitsToDouble(mydata.getLong("additional",0));
 
         breakfast_button=(Button) findViewById(R.id.breakfast_button);
         lunch_button = (Button) findViewById(R.id.lunch_button);
@@ -38,27 +48,18 @@ public class DailyCaloriesActivity extends AppCompatActivity {
         dinner_kcal = (TextView) findViewById(R.id.dinner_kcal);
         additional_kcal = (EditText)  findViewById(R.id.additional_kcal);
         total_kcal = (TextView)  findViewById(R.id.total_kcal);
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null){
-            String time=extras.getString("time");
 
-            if (time.equals("breakfast")){
-
-                breakfast_kcal_value= extras.getDouble("calories");
-
-                breakfast_kcal.setText(String.format("%.2f",breakfast_kcal_value)+"kcal");
-            }
-            else if(time == "lunch"){
-                lunch_kcal_value= extras.getDouble("calories");
-                lunch_kcal.setText(String.format("%.2f",lunch_kcal_value)+"kcal");
-            }
-            else if(time == "dinner"){
-                dinner_kcal_value= extras.getDouble("calories");
-                dinner_kcal.setText(String.format("%.2f",dinner_kcal_value)+"kcal");
-            }
-            total_kcal_value=breakfast_kcal_value+lunch_kcal_value+dinner_kcal_value+additional_kcal_value;
-
+        breakfast_kcal.setText("Breakfast : "+String.format("%.2f",breakfast_kcal_value)+"kcal");
+        lunch_kcal.setText("Lunch  : "+String.format("%.2f",lunch_kcal_value)+"kcal");
+        dinner_kcal.setText("Dinner : "+String.format("%.2f",dinner_kcal_value)+"kcal");
+        if(additional_kcal_value !=0) {
+            additional_kcal.setText(String.format("%.2f", additional_kcal_value));
         }
+        total_kcal_value=breakfast_kcal_value+lunch_kcal_value+dinner_kcal_value+additional_kcal_value;
+        total_kcal.setText(String.format("%.2f",total_kcal_value)+"kcal");
+
+
+
         breakfast_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,6 +82,30 @@ public class DailyCaloriesActivity extends AppCompatActivity {
                 Intent i = new Intent(DailyCaloriesActivity.this,CaloriesCalActivity.class);
                 i.putExtra("time","dinner");
                 startActivity(i);
+            }
+        });
+        additional_kcal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(!additional_kcal.getText().toString().matches("")) {
+                    additional_kcal_value = Double.parseDouble(additional_kcal.getText().toString());
+
+                }
+                else{
+                    additional_kcal_value=0;
+                }
+                SharedPreferences mydata=getSharedPreferences("mydata", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = mydata.edit();
+                editor.putLong("additional",Double.doubleToLongBits(additional_kcal_value));
+                editor.commit();
+                total_kcal_value=breakfast_kcal_value+lunch_kcal_value+dinner_kcal_value+additional_kcal_value;
+                total_kcal.setText(String.format("%.2f",total_kcal_value)+"kcal");
             }
         });
     }

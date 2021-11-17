@@ -2,7 +2,9 @@ package hk.hku.cs.comp3330project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,11 +42,17 @@ public class CaloriesCalActivity extends AppCompatActivity {
     private TextView total_kcal_text;
     private Button calores_cal_done_button;
 
-
+    private String time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_calories_cal);
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null){
+          time=extras.getString("time");
+        }
+
         beef_button = (Button) findViewById(R.id.beef_button);
         pork_button = (Button)findViewById(R.id.pork_button);
         chicken_button = (Button)findViewById(R.id.chicken_button);
@@ -251,8 +259,12 @@ public class CaloriesCalActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(CaloriesCalActivity.this,DailyCaloriesActivity.class);
-                i.putExtra("time","breakfast");
-                i.putExtra("calories",total_kcal);
+                SharedPreferences mydata=getSharedPreferences("mydata", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = mydata.edit();
+                editor.putLong(time,Double.doubleToLongBits(total_kcal));
+                editor.commit();
+//                i.putExtra("time","breakfast");
+//                i.putExtra("calories",total_kcal);
                 startActivity(i);
             }
         });

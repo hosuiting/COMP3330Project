@@ -96,6 +96,15 @@
                     android:text="Edit" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="Additional calories intake"
+                android:textSize="20sp" />
+
             <EditText
                 android:id="@+id/additional_kcal"
                 android:layout_width="match_parent"
@@ -103,7 +112,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:ems="10"
-                android:hint="Additional intake (kcal)"
+                android:hint="kcal"
                 android:inputType="numberDecimal" />
 
             <LinearLayout
