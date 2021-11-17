@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this,ChatroomActivity.class));
             }
         });
+        toBody=(Button) findViewById(R.id.toBody);
         toBody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
