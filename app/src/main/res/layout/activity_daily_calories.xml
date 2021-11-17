@@ -97,14 +97,14 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/additional_kcal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:ems="10"
                 android:hint="Additional intake (kcal)"
-                android:inputType="textPersonName" />
+                android:inputType="numberDecimal" />
 
             <LinearLayout
                 android:layout_width="match_parent"

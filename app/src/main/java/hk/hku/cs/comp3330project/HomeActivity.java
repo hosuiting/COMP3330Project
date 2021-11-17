@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
         toCaloriesCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this,CaloriesCalActivity.class));
+                startActivity(new Intent(HomeActivity.this,DailyCaloriesActivity.class));
             }
         });
         toChatroom=(Button) findViewById(R.id.goChatroom);
