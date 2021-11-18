@@ -43,6 +43,7 @@ public class CaloriesCalActivity extends AppCompatActivity {
     private Button calores_cal_done_button;
 
     private String time;
+    private String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,7 @@ public class CaloriesCalActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
           time=extras.getString("time");
+          date=extras.getString("date");
         }
 
         beef_button = (Button) findViewById(R.id.beef_button);
@@ -259,6 +261,7 @@ public class CaloriesCalActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(CaloriesCalActivity.this,DailyCaloriesActivity.class);
+                i.putExtra("date",date);
                 SharedPreferences mydata=getSharedPreferences("mydata", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = mydata.edit();
                 editor.putLong(time,Double.doubleToLongBits(total_kcal));
