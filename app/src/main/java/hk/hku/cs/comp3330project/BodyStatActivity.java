@@ -57,7 +57,7 @@ public class BodyStatActivity extends AppCompatActivity {
                         editor.putString("height",input.getText().toString());
                         editor.commit();
                         Height_text.setText("Height : "+input.getText().toString()+" m");
-                        
+
                     }
                 });
                 builder.setNegativeButton("Cancel   ", new DialogInterface.OnClickListener() {
