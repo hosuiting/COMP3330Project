@@ -6,9 +6,9 @@
     app:startDestination="@id/testFragment">
     <fragment
         android:id="@+id/testFragment"
-        android:name="hk.hku.cs.comp3330project.TestFragment"
+        android:name="hk.hku.cs.comp3330project.BodyMainFragment"
         android:label="fragment_test"
-        tools:layout="@layout/fragment_test" >
+        tools:layout="@layout/fragment_body_main" >
         <action
             android:id="@+id/action_testFragment_to_homeActivity2"
             app:destination="@id/homeActivity2" />
