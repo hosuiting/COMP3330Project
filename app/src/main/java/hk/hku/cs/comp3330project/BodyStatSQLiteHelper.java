@@ -28,7 +28,7 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
                     COL_weight + " DECIMAL(3,2), " +
                     COL_bmi + " DECIMAL(3,2), " +
                     COL_body_fat + " DECIMAL(3,2), " +
-                    COL_record_datetime + " DATETIME DEFAULT CURRENT_TIMESTAMP ); ";
+                    COL_record_datetime + " DATETIME DEFAULT (datetime('now','localtime')) ); ";
 //    public BodyStatSQLiteHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
 //        super(context, name, factory, version);
 //    }
