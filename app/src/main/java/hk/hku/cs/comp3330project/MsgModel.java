@@ -1,5 +1,7 @@
 package hk.hku.cs.comp3330project;
 
+
+
 public class MsgModel {
     private String cnt;
 
