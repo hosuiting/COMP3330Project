@@ -1,17 +1,25 @@
 package hk.hku.cs.comp3330project;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -113,7 +121,16 @@ public class BodyMainFragment extends Fragment {
             orderedTextView[i] = (TextView)view.findViewById(textViewIds[i]);
             orderedTextView[i].setText(sharedPref.getString(preference_keys[i], "No Data"));
         }
+        view.findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+//                showDatePickerDialog(v);
+                ArrayList<String> records = sqliteHelper.getRecordFromDateRange("2021-11-20", "2021-11-20");
+                Toast.makeText(getActivity(), records.get(0), Toast.LENGTH_SHORT).show();
 
+            }
+        });
         view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,7 +190,7 @@ public class BodyMainFragment extends Fragment {
                                 editor.putString(preference_keys[i1], latest[i1]);
                                 orderedTextView[i1].setText(latest[i1]);
                             }
-                            updateGraph();
+                            updateGraph(null);
 
                             Toast.makeText(context, "End", Toast.LENGTH_LONG).show();
 
@@ -197,19 +214,118 @@ public class BodyMainFragment extends Fragment {
 //            }
 //        });
         graphView = view.findViewById(R.id.idGraphView);
-        updateGraph();
+        graphView.setOnClickListener(new View.OnClickListener() {
+
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                Context context = getActivity();
+                Toast.makeText(context, "Graph clicked", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog.setTitle("Graph Settings");
+
+                LinearLayout layout = new LinearLayout(context);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+
+                EditText fromDate = editable_date(context, "Date From");
+                EditText toDate = editable_date(context, "Date To");
+
+                layout.addView(fromDate);
+                layout.addView(toDate);
+                dialog.setView(layout); // Again this is a set method, not add
+                dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // positive
+                        EditText[] userInputs = {fromDate, toDate};
+                        String[] defaultInputs = new String[2];
+                        for (int i1 = 0; i1 < userInputs.length; ++i1) {
+                            String inputValue = userInputs[i1].getText().toString();
+                            if (inputValue.matches("")) {
+                                Toast.makeText(context, "Please select both dates", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            defaultInputs[i1] = inputValue;
+                        }
+                        ArrayList<String> records = sqliteHelper.getRecordFromDateRange(defaultInputs[0], defaultInputs[1]);
+                        Toast.makeText(context, Integer.toString(records.size())+" records to be shown", Toast.LENGTH_SHORT).show();
+                        updateGraph(records);
+
+                    }
+                });
+                dialog.setNegativeButton("Cancel   ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                dialog.show();
+//                showDatePickerDialog(v);
+            }
+        });
+        updateGraph(null);
         return view;
     }
 
-    private void updateGraph() {
-        ArrayList<Double> testData = new ArrayList<>();
-        ArrayList<String> latest5 = sqliteHelper.get5LatestStatistics();
-        for(String weightString: latest5) {
-            testData.add(Double.parseDouble(weightString));
+    private EditText editable_date(Context context, String hint) {
+        final EditText date = new EditText(context);
+        date.setClickable(false);
+        date.setFocusable(false);
+        date.setFocusableInTouchMode(false);
+//                fromDate.setCursorVisible(false);
+//                android:clickable="false"
+//                android:cursorVisible="false"
+//                android:focusable="false"
+//                android:focusableInTouchMode="false"
+
+        date.setHint(hint);
+        date.setOnClickListener(new View.OnClickListener(){
+
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(v, date);
+            }
+        });
+        return date;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void showDatePickerDialog(View v, EditText modifyDate) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String formatDate = String.format("%d-%d-%d", year, month + 1, dayOfMonth);
+//                tvSelectDate.setText(formatDate);
+//                timePicker(formatDate);
+                Toast.makeText(v.getContext(), formatDate, Toast.LENGTH_SHORT).show();
+                modifyDate.setText(formatDate);
+            }
+        }, year, month, dayOfMonth);
+//        calendar.add(Calendar.MONTH, 1);
+        long now = System.currentTimeMillis();
+//        long maxDate = calendar.getTimeInMillis();
+//        datePickerDialog.getDatePicker().setMinDate(now);
+        datePickerDialog.getDatePicker().setMaxDate(now); //After one month from now
+        datePickerDialog.show();
+    }
+
+    private void updateGraph(ArrayList<String> data) {
+        ArrayList<Double> doubleData = new ArrayList<>();
+        if (data == null) {
+            data = sqliteHelper.get5LatestStatistics();
+        }
+        for(String weightString: data) {
+            doubleData.add(Double.parseDouble(weightString));
 //            Toast.makeText(getActivity(), weightString, Toast.LENGTH_SHORT).show();
 
         }
-        setGraphWithArrayOfRecords(testData);
+        setGraphWithArrayOfRecords(doubleData);
     }
 
     /**
@@ -233,3 +349,4 @@ public class BodyMainFragment extends Fragment {
 
     }
 }
+

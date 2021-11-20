@@ -81,6 +81,22 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
         return records;
     }
 
+    public ArrayList<String> getRecordFromDateRange(String fromDate, String toDate) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT weight FROM Body_history WHERE date(record_datetime) <= ? AND date(record_datetime) >= ? ORDER BY record_datetime ", new String[]{fromDate, toDate});
+        ArrayList<String> records = new ArrayList<>();
+        while (cursor.moveToNext()) {
+//            String[] record = new String[5];
+//            for (int i = 1; i < 6; ++i) {
+//                record[i-1] = cursor.getString(i);
+//            }
+//            records.add(record);
+            records.add(cursor.getString(0));
+        }
+        cursor.close();
+        return records;
+    }
+
 
     /**
      * Use this function to add statistics to database
