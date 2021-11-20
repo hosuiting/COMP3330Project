@@ -6,10 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.lang.Math;
 
 public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "TravelSpots";
@@ -24,10 +23,10 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NAME + " ( " +
                     COL_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COL_height + " DECIMAL(3,2) NOT NULL, " +
-                    COL_weight + " DECIMAL(3,2), " +
-                    COL_bmi + " DECIMAL(3,2), " +
-                    COL_body_fat + " DECIMAL(3,2), " +
+                    COL_height + " DOUBLE NOT NULL, " +
+                    COL_weight + " DOUBLE, " +
+                    COL_bmi + " DOUBLE, " +
+                    COL_body_fat + " DOUBLE, " +
                     COL_record_datetime + " DATETIME DEFAULT (datetime('now','localtime')) ); ";
 //    public BodyStatSQLiteHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
 //        super(context, name, factory, version);
@@ -89,12 +88,12 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
      * @return -1 when fail
      */
     public long addStatistics(String[] userInput) {
-        Double weight = Double.parseDouble(userInput[0]);
+        Double weight = Double.parseDouble(userInput[0]) / 100.0;
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_height, userInput[0]);
         values.put(COL_weight, userInput[1]);
-        values.put(COL_bmi, Double.parseDouble(userInput[1])/(weight*weight));
+        values.put(COL_bmi, Math.round(Double.parseDouble(userInput[1])/(weight*weight)* 100.0) / 100.0);
         values.put(COL_body_fat, userInput[2]);
         return db.insert(TABLE_NAME, null, values);
     }
