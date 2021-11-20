@@ -83,7 +83,7 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
 
     public ArrayList<String> getRecordFromDateRange(String fromDate, String toDate) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT weight FROM Body_history WHERE date(record_datetime) <= ? AND date(record_datetime) >= ? ORDER BY record_datetime ", new String[]{fromDate, toDate});
+        Cursor cursor = db.rawQuery("SELECT weight FROM Body_history WHERE date(record_datetime) <= ? AND date(record_datetime) >= ? ORDER BY record_datetime ", new String[]{toDate, fromDate});
         ArrayList<String> records = new ArrayList<>();
         while (cursor.moveToNext()) {
 //            String[] record = new String[5];
