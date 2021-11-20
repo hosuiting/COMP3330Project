@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -12,7 +14,17 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,12 +68,89 @@ public class ChatbotActivity extends AppCompatActivity {
             }
         });
     }
+    public void getBotMessage(final String message) {
+        final String url = "http://api.brainshop.ai/get?bid=161460&key=Q99aIs2bkEhEx5Rn&uid=[uid]&msg=" + message;
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        final Handler handler = new Handler(Looper.getMainLooper());
+        System.out.println(message);
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                boolean success = true;
+                final String jsonString = getJsonString(url);
+                System.out.println("Waiting");
+                System.out.println(jsonString);
+                if (jsonString.equals("Fail to connect"))
+                    success = false;
+                if(success) {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            parse_JSON_String(jsonString);
+                        }
+                    });
+                }
+            }
+        });
+    }
+    public void parse_JSON_String(String JSONString){
+        try {
+            JSONObject rootJSONObj = new JSONObject(JSONString);
+            String responseMessage = rootJSONObj.getString("cnt");
+            chatsModelArrayList.add(new ChatsModel(responseMessage,BOT_KEY));
+            chatRVAdapter.notifyDataSetChanged();
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getJsonString(String url) {
+        System.out.println(url);
+        HttpURLConnection conn_object = null;
+        final int HTML_BUFFER_SIZE = 2*1024*1024;
+        char htmlBuffer[] = new char[HTML_BUFFER_SIZE];
+        try {
+            URL url_object = new URL(url);
+            conn_object = (HttpURLConnection) url_object.openConnection();
+            conn_object.setInstanceFollowRedirects(true);
+            BufferedReader reader_list = new BufferedReader(new InputStreamReader(conn_object.getInputStream()));
+            String HTMLSource = ReadBufferedHTML(reader_list, htmlBuffer,
+                    HTML_BUFFER_SIZE);
+            reader_list.close();
+            return HTMLSource;
+        } catch (Exception e) {
+            return "Fail to connect!";
+        } finally {
+            // When HttpClient instance is no longer needed,
+            // shut down the connection manager to ensure
+            // immediate deallocation of all system resources
+            if (conn_object != null) {
+                conn_object.disconnect();
+            }
+        }
+    }
+    public String ReadBufferedHTML(BufferedReader reader, char [] htmlBuffer, int bufSz) throws java.io.IOException {
+        htmlBuffer[0] = '\0';
+        int offset = 0;
+        do {
+            int cnt = reader.read(htmlBuffer, offset, bufSz - offset);
+            if (cnt > 0) {
+                offset += cnt;
+            } else {
+                break;
+            }
+        } while (true);
+        return new String(htmlBuffer);
+    }
+
+
     private void getResponse (String message){
         chatsModelArrayList.add(new ChatsModel(message,USER_KEY));
-        chatsModelArrayList.add(new ChatsModel("Please revert your question",BOT_KEY));
-        chatRVAdapter.notifyDataSetChanged();
-        /*
-        String url = "http://api.brainshop.ai/get?bid=161460&key=Q99aIs2bkEhEx5Rn&uid=[uid]&msg=" + message;
+        //getBotMessage(message);
+        //chatsModelArrayList.add(new ChatsModel("Please revert your question",BOT_KEY));
+        //chatRVAdapter.notifyDataSetChanged();
+        String url = "http://api.brainshop.ai/get?bid=161460&key=Q99aIs2bkEhEx5Rn&uid=1&msg=" + message;
         String BASE_URL = "http://api.brainshop.ai/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -69,7 +158,7 @@ public class ChatbotActivity extends AppCompatActivity {
                 .build();
         RetrofitAPI retrofitAPI = retrofit.create(RetrofitAPI.class);
         Call<MsgModel> call = retrofitAPI.getMessage(url);
-        call.equals(new Callback<MsgModel>() {
+        call.enqueue(new Callback<MsgModel>() {
             @Override
             public void onResponse(Call<MsgModel> call, Response<MsgModel> response) {
                 if (response.isSuccessful()){
@@ -81,11 +170,9 @@ public class ChatbotActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<MsgModel> call, Throwable t) {
-                chatsModelArrayList.add(new ChatsModel("Please revert your question",BOT_KEY));
+                chatsModelArrayList.add(new ChatsModel("The connection is failed",BOT_KEY));
                 chatRVAdapter.notifyDataSetChanged();
             }
         });
-         */
-
     }
 }
