@@ -113,4 +113,15 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
         values.put(COL_body_fat, userInput[2]);
         return db.insert(TABLE_NAME, null, values);
     }
+    public long addStatfromMain(String height, String weight){
+        Double height1 = Double.parseDouble(height);
+        Double weight1 = Double.parseDouble(weight);
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COL_height, height1);
+        values.put(COL_weight, weight1);
+        values.put(COL_bmi, weight1/(height1*height1));
+        return db.insert(TABLE_NAME,null,values);
+
+    }
 }
