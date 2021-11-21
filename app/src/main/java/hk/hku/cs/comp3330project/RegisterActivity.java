@@ -13,11 +13,14 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import retrofit2.http.Body;
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText username;
     private EditText age;
     private EditText height;
     private EditText weight;
+    private EditText bodyfat;
     private Button confirm_button;
     private Button cancel_button;
     private RadioButton Male_button,Female_button;
@@ -29,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         age = (EditText) findViewById(R.id.register_age);
         height = (EditText) findViewById(R.id.register_height);
         weight = (EditText) findViewById(R.id.register_weight);
+        bodyfat = (EditText) findViewById(R.id.register_bodyfat);
         confirm_button = (Button) findViewById(R.id.Confirm_button);
         cancel_button = (Button) findViewById(R.id.Cancel_button);
         Male_button = (RadioButton)findViewById(R.id.Male_button);
@@ -43,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(TextUtils.isEmpty(username.getText()) || TextUtils.isEmpty(age.getText()) ||
-                    TextUtils.isEmpty(height.getText()) || TextUtils.isEmpty(weight.getText())){
+                    TextUtils.isEmpty(height.getText()) || TextUtils.isEmpty(weight.getText()) || TextUtils.isEmpty(bodyfat.getText())){
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "Please input in all the fields!",
                             Toast.LENGTH_SHORT);
@@ -56,6 +60,10 @@ public class RegisterActivity extends AppCompatActivity {
                     editor.putString("username",username.getText().toString());
                     editor.putString("age",age.getText().toString());
                     editor.commit();
+
+                    BodyStatSQLiteHelper putdb = new BodyStatSQLiteHelper(RegisterActivity.this);
+                    putdb.addStatfromRegister(height.getText().toString(),weight.getText().toString(),bodyfat.getText().toString());
+
                     startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
 
                 }
