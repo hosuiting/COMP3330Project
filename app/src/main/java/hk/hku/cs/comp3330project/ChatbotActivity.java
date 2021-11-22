@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.speech.RecognitionListener;
+import android.speech.RecognitionService;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -37,10 +42,13 @@ public class ChatbotActivity extends AppCompatActivity {
     private RecyclerView chatsRV;
     private EditText userMsgEdit;
     private FloatingActionButton sendMsgFAB;
+    private FloatingActionButton micFAB;
     private final String BOT_KEY = "bot";
     private final String USER_KEY = "user";
     private ArrayList<ChatsModel> chatsModelArrayList;
     private ChatRVAdapter chatRVAdapter;
+    private SpeechRecognizer speechRecognizer;
+    private Boolean count = false;
 
 
     @Override
@@ -50,11 +58,13 @@ public class ChatbotActivity extends AppCompatActivity {
         chatsRV = findViewById(R.id.idRVChats);
         userMsgEdit = findViewById(R.id.idEditMessage);
         sendMsgFAB = findViewById(R.id.idFABSend);
+        micFAB = findViewById(R.id.idFABMic);
         chatsModelArrayList = new ArrayList<>();
         chatRVAdapter = new ChatRVAdapter(chatsModelArrayList,this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         chatsRV.setLayoutManager(manager);
         chatsRV.setAdapter(chatRVAdapter);
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
         sendMsgFAB.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -65,6 +75,69 @@ public class ChatbotActivity extends AppCompatActivity {
                 }
                 getResponse(userMsgEdit.getText().toString());
                 userMsgEdit.setText("");
+            }
+        });
+        micFAB.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent speechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                if (count == false){
+                    count = true;
+                    micFAB.setImageDrawable(getDrawable(R.drawable.ic_mic));
+                    speechRecognizer.startListening(speechRecognizerIntent);
+                }
+                else{
+                    speechRecognizer.stopListening();
+                    micFAB.setImageDrawable(getDrawable(R.drawable.ic_mic_off));
+                    count = false;
+                }
+            }
+        });
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onReadyForSpeech(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+
+            }
+
+            @Override
+            public void onRmsChanged(float v) {
+
+            }
+
+            @Override
+            public void onBufferReceived(byte[] bytes) {
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+
+            }
+
+            @Override
+            public void onError(int i) {
+
+            }
+
+            @Override
+            public void onResults(Bundle bundle) {
+                ArrayList<String> data = bundle.getStringArrayList(speechRecognizer.RESULTS_RECOGNITION);
+                userMsgEdit.setText(data.get(0));
+            }
+
+            @Override
+            public void onPartialResults(Bundle bundle) {
+
+            }
+
+            @Override
+            public void onEvent(int i, Bundle bundle) {
+
             }
         });
     }
@@ -99,6 +172,7 @@ public class ChatbotActivity extends AppCompatActivity {
             String responseMessage = rootJSONObj.getString("cnt");
             chatsModelArrayList.add(new ChatsModel(responseMessage,BOT_KEY));
             chatRVAdapter.notifyDataSetChanged();
+            chatsRV.smoothScrollToPosition(chatsRV.getAdapter().getItemCount()-1);
         }catch (JSONException e) {
             e.printStackTrace();
         }

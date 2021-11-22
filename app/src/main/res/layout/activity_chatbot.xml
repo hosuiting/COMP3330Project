@@ -22,15 +22,26 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Message"
+            android:hint="Ask something to FitIN AI"
             android:textColorHint="@color/white"
             android:id="@+id/idEditMessage"
             android:textColor="@color/white"
             android:layout_margin="3dp"
             android:layout_centerInParent="true"
-            android:layout_toLeftOf="@id/idFABSend"
+            android:layout_toLeftOf="@id/idFABMic"
             android:singleLine="true">
         </EditText>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_mic_off"
+            android:id="@+id/idFABMic"
+            android:layout_margin="4dp"
+            app:fabCustomSize="45dp"
+            app:backgroundTint="@color/fab_color"
+            app:tint="@color/white"
+            android:layout_toLeftOf="@id/idFABSend" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
