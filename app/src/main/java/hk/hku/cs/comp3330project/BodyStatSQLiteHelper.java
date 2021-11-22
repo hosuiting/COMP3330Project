@@ -50,7 +50,7 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
      */
     public String[] getLatestStatistics() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM Body_history ORDER BY record_datetime DESC LIMIT 1", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM Body_history ORDER BY rowid DESC LIMIT 1", null);
 
         String[] record = new String[5];
         while (cursor.moveToNext()) {
@@ -114,14 +114,14 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
         return db.insert(TABLE_NAME, null, values);
     }
     public long addStatfromRegister(String height, String weight, String bodyfat){
-        Double height1 = Double.parseDouble(height);
+        Double height1 = Double.parseDouble(height)/100.0;
         Double weight1 = Double.parseDouble(weight);
         Double bodyfat1 = Double.parseDouble(bodyfat);
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COL_height, height1);
+        values.put(COL_height, height);
         values.put(COL_weight, weight1);
-        values.put(COL_bmi, Math.round(weight1*100/(height1*height1))/100);
+        values.put(COL_bmi, Math.round(weight1*100/(height1*height1))/100.0);
         values.put(COL_body_fat,bodyfat1);
         System.out.println("TEST");
         return db.insert(TABLE_NAME,null,values);

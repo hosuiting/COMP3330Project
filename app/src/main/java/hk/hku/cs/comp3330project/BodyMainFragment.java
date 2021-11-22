@@ -106,8 +106,6 @@ public class BodyMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-
         View view = inflater.inflate(R.layout.fragment_body_main, container, false);
         view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,93 +117,74 @@ public class BodyMainFragment extends Fragment {
         orderedTextView = new TextView[5];
         for (int i = 0; i < preference_keys.length; ++i) {
             orderedTextView[i] = (TextView)view.findViewById(textViewIds[i]);
-            orderedTextView[i].setText(sharedPref.getString(preference_keys[i], "No Data"));
         }
-        view.findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(View v) {
-//                showDatePickerDialog(v);
-                ArrayList<String> records = sqliteHelper.getRecordFromDateRange("2021-11-20", "2021-11-20");
-                Toast.makeText(getActivity(), records.get(0), Toast.LENGTH_SHORT).show();
+        updateTextFields();
+        view.findViewById(R.id.button4).setOnClickListener(v -> {
+            ArrayList<String> records = sqliteHelper.getRecordFromDateRange("2021-11-20", "2021-11-20");
+            Toast.makeText(getActivity(), records.get(0), Toast.LENGTH_SHORT).show();
 
-            }
         });
-        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context context = getActivity();
-                String[] latest = sqliteHelper.getLatestStatistics();
-                for (String received: latest) {
-                    Toast.makeText(context, received, Toast.LENGTH_SHORT).show();
-                }
+        view.findViewById(R.id.button2).setOnClickListener(view1 -> {
+            Context context = getActivity();
+            String[] latest = sqliteHelper.getLatestStatistics();
+            for (String received: latest) {
+                Toast.makeText(context, received, Toast.LENGTH_SHORT).show();
+            }
 
-            }
         });
-        view.findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Context context = getActivity();
-                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                dialog.setTitle("Latest Measurement");
+        view.findViewById(R.id.button3).setOnClickListener(view12 -> {
+            Context context = getActivity();
+            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            dialog.setTitle("Latest Measurement");
 //                dialog.setMessage("Something");
 
-                LinearLayout layout = new LinearLayout(context);
-                layout.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout layout = new LinearLayout(context);
+            layout.setOrientation(LinearLayout.VERTICAL);
 
-                final EditText heightBox = new EditText(context);
-                heightBox.setHint("Height (cm)");
-                layout.addView(heightBox);
+            final EditText heightBox = new EditText(context);
+            heightBox.setHint("Height (cm)");
+            layout.addView(heightBox);
 
-                final EditText weightBox = new EditText(context);
-                weightBox.setHint("Weight (kg)");
-                layout.addView(weightBox);
+            final EditText weightBox = new EditText(context);
+            weightBox.setHint("Weight (kg)");
+            layout.addView(weightBox);
 
-                final EditText fatBox = new EditText(context);
-                fatBox.setHint("Body Fat (% Fat)");
-                layout.addView(fatBox);
+            final EditText fatBox = new EditText(context);
+            fatBox.setHint("Body Fat (% Fat)");
+            layout.addView(fatBox);
 
-                dialog.setView(layout); // Again this is a set method, not add
-                dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // positive
-                        EditText[] userInputs = {heightBox, weightBox, fatBox};
-                        String[] defaultInputs = {"160", "60", "0.6"};
-                        for (int i1 = 0; i1 < userInputs.length; ++i1) {
-                            String inputValue = userInputs[i1].getText().toString();
-                            if (!inputValue.matches("")) {
-                                defaultInputs[i1] = inputValue;
-                            }
-                            Toast.makeText(context, defaultInputs[i1], Toast.LENGTH_SHORT).show();
+            dialog.setView(layout); // Again this is a set method, not add
+            dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    // positive
+                    EditText[] userInputs = {heightBox, weightBox, fatBox};
+                    String[] defaultInputs = {"160", "60", "0.6"};
+                    for (int i1 = 0; i1 < userInputs.length; ++i1) {
+                        String inputValue = userInputs[i1].getText().toString();
+                        if (!inputValue.matches("")) {
+                            defaultInputs[i1] = inputValue;
                         }
-                        if (sqliteHelper.addStatistics(defaultInputs) == -1) {
-                            Toast.makeText(context, "Insertion Failed", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(context, "Succeed", Toast.LENGTH_SHORT).show();
-                            String[] latest = sqliteHelper.getLatestStatistics();
-                            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            for (int i1 = 0; i1 < preference_keys.length; ++i1) {
-                                editor.putString(preference_keys[i1], latest[i1]);
-                                orderedTextView[i1].setText(latest[i1]);
-                            }
-                            updateGraph(null);
-
-                            Toast.makeText(context, "End", Toast.LENGTH_LONG).show();
-
-                            editor.apply();
-                        }
+                        Toast.makeText(context, defaultInputs[i1], Toast.LENGTH_SHORT).show();
                     }
-                });
-                dialog.setNegativeButton("Cancel   ", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
+                    if (sqliteHelper.addStatistics(defaultInputs) == -1) {
+                        Toast.makeText(context, "Insertion Failed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Succeed", Toast.LENGTH_SHORT).show();
+                        updateTextFields();
+                        updateGraph(null);
+
+                        Toast.makeText(context, "End", Toast.LENGTH_LONG).show();
                     }
-                });
-                dialog.show();
-            }
+                }
+            });
+            dialog.setNegativeButton("Cancel   ", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            dialog.show();
         });
 //        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -348,5 +327,13 @@ public class BodyMainFragment extends Fragment {
         graphView.addSeries(series);
 
     }
+
+    private void updateTextFields() {
+        String[] latest = sqliteHelper.getLatestStatistics();
+        for (int i = 0; i < orderedTextView.length; ++i) {
+            orderedTextView[i].setText(latest[i]);
+        }
+    }
+
 }
 

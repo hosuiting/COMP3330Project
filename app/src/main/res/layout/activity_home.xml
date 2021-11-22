@@ -44,14 +44,6 @@
                             android:text="register test" />
 
                         <Button
-                            android:id="@+id/toBodyStat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="1"
-                            android:text="Body Statistics Record" />
-
-                        <Button
                             android:id="@+id/toCaloriesCal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

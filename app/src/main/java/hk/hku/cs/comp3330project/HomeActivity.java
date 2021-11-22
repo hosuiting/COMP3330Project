@@ -21,7 +21,6 @@ public class HomeActivity extends AppCompatActivity {
     private Button toCaloriesCal;
     private Button toChatroom;
     private Button toBody;
-    private Button toBodyStat;
     private TextView Greet;
     private Button toRegister;
 
@@ -64,14 +63,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this,BodyActivity.class));
-            }
-        });
-        toBodyStat = (Button) findViewById(R.id.toBodyStat);
-        toBodyStat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(HomeActivity.this,BodyStatActivity.class);
-                startActivity(i);
             }
         });
     }
