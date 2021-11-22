@@ -25,10 +25,13 @@ public class MainActivity extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(mydata.contains("username")){
+                    startActivity(new Intent(MainActivity.this,HomeActivity.class));
+                }
+                else {
 
-
-                startActivity(new Intent(MainActivity.this,RegisterActivity.class));
-
+                    startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                }
 
             }
         });

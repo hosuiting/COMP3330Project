@@ -121,7 +121,10 @@ public class BodyMainFragment extends Fragment {
         updateTextFields();
         view.findViewById(R.id.button4).setOnClickListener(v -> {
             ArrayList<String> records = sqliteHelper.getRecordFromDateRange("2021-11-20", "2021-11-20");
-            Toast.makeText(getActivity(), records.get(0), Toast.LENGTH_SHORT).show();
+            for (String record : records) {
+                Toast.makeText(getActivity(), record, Toast.LENGTH_SHORT).show();
+
+            }
 
         });
         view.findViewById(R.id.button2).setOnClickListener(view1 -> {
