@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/exercise_nav_graph"
+    app:startDestination="@id/exerciseVideosFragment">
+
+    <fragment
+        android:id="@+id/exerciseVideosFragment"
+        android:name="hk.hku.cs.comp3330project.ExerciseVideosFragment"
+        android:label="fragment_exercise_videos"
+        tools:layout="@layout/fragment_exercise_videos" />
+</navigation>

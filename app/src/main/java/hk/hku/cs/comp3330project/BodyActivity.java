@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class BodyActivity extends AppCompatActivity {
-    private Button home_button;
+//    private Button home_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
