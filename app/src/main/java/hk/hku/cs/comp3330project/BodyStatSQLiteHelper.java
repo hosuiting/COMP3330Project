@@ -67,7 +67,7 @@ public class BodyStatSQLiteHelper extends SQLiteOpenHelper {
      */
     public ArrayList<String> get5LatestStatistics() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT weight FROM Body_history ORDER BY record_datetime DESC LIMIT 5", null);
+        Cursor cursor = db.rawQuery("SELECT weight FROM Body_history ORDER BY rowid DESC LIMIT 5", null);
         ArrayList<String> records = new ArrayList<>();
         while (cursor.moveToNext()) {
 //            String[] record = new String[5];
