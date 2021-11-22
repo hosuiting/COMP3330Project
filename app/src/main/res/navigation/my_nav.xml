@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/chatbotActivity">
+
+    <activity
+        android:id="@+id/chatbotActivity"
+        android:name="hk.hku.cs.comp3330project.ChatbotActivity"
+        android:label="activity_chatbot"
+        tools:layout="@layout/activity_chatbot" />
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="hk.hku.cs.comp3330project.HomeActivity"
+        android:label="activity_home"
+        tools:layout="@layout/activity_home" />
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="hk.hku.cs.comp3330project.RegisterActivity"
+        android:label="activity_register"
+        tools:layout="@layout/activity_register" />
+</navigation>

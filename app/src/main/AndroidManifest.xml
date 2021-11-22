@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.COMP3330Project"
+
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ExerciseActivity"
@@ -51,6 +52,7 @@
             android:exported="true" />
         <activity
             android:name=".HomeActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
