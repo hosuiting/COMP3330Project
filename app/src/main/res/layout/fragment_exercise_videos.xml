@@ -4,23 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ExerciseVideosFragment">
-
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:id='@+id/listContainer'
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
+        <androidx.camera.view.PreviewView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/preview_view"
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hello_blank_fragment" />
+
         <Button
+            android:id="@+id/dynamicAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dynamicAdd"
-            android:text="add button" />
+            android:text="Start recording" />
+
+        <Button
+            android:id="@+id/stopBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stop recording" />
     </LinearLayout>
 
 </ScrollView>
