@@ -78,7 +78,7 @@ public class ExerciseVideosFragment extends Fragment {
         if (getArguments() != null) {
             btnValue = getArguments().getInt(ARG_PARAM1);
 //            testField.setText(Integer.toString(mParam1));
-            Toast.makeText(getActivity(), Integer.toString(mParam1), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), Integer.toString(btnValue), Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
         }
