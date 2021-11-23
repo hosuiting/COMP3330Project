@@ -43,6 +43,7 @@ public class DailyCaloriesActivity extends AppCompatActivity {
     private Button tomorrow;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date today;
+    private Button toCalendar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +57,9 @@ public class DailyCaloriesActivity extends AppCompatActivity {
             date_display.setText(date);
             Date check_today=Calendar.getInstance().getTime();
             String check_today_string=dateFormat.format(check_today);
-            if(date.equals(check_today_string)){
-                tomorrow.setVisibility(View.GONE);
-            }
+//            if(date.equals(check_today_string)){
+//                tomorrow.setVisibility(View.GONE);
+//            }
         }
         breakfast_kcal_value=Double.longBitsToDouble(mydata.getLong(date+"breakfast",0));
         lunch_kcal_value=Double.longBitsToDouble(mydata.getLong(date+"lunch",0));
@@ -74,7 +75,7 @@ public class DailyCaloriesActivity extends AppCompatActivity {
         additional_kcal = (EditText)  findViewById(R.id.additional_kcal);
         total_kcal = (TextView)  findViewById(R.id.total_kcal);
         yesterday = (Button)findViewById(R.id.yesterday);
-
+        toCalendar = (Button)findViewById(R.id.toCalendar);
 
         breakfast_kcal.setText("Breakfast : "+String.format("%.2f",breakfast_kcal_value)+"kcal");
         lunch_kcal.setText("Lunch  : "+String.format("%.2f",lunch_kcal_value)+"kcal");
@@ -85,7 +86,12 @@ public class DailyCaloriesActivity extends AppCompatActivity {
         total_kcal_value=breakfast_kcal_value+lunch_kcal_value+dinner_kcal_value+additional_kcal_value;
         total_kcal.setText(String.format("%.2f",total_kcal_value)+"kcal");
 
-
+        toCalendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DailyCaloriesActivity.this,CalendarActivity.class));
+            }
+        });
 
         breakfast_button.setOnClickListener(new View.OnClickListener() {
             @Override

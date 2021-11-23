@@ -67,13 +67,14 @@ public class HomeActivity extends AppCompatActivity {
         toCaloriesCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Date date = Calendar.getInstance().getTime();
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String date_string = dateFormat.format(date);
-
-                Intent i=new Intent(HomeActivity.this,DailyCaloriesActivity.class);
-                i.putExtra("date",date_string);
-                startActivity(i);
+//                Date date = Calendar.getInstance().getTime();
+//                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//                String date_string = dateFormat.format(date);
+//
+//                Intent i=new Intent(HomeActivity.this,DailyCaloriesActivity.class);
+//                i.putExtra("date",date_string);
+//                startActivity(i);
+                startActivity(new Intent(HomeActivity.this,CalendarActivity.class));
             }
         });
         toChatroom=(Button) findViewById(R.id.goChatroom);

@@ -11,6 +11,8 @@ import android.widget.CalendarView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.text.DecimalFormat;
+
 public class CalendarActivity extends AppCompatActivity {
     CalendarView calendarView;
     @Override
@@ -21,7 +23,12 @@ public class CalendarActivity extends AppCompatActivity {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
-                
+                DecimalFormat mFormat= new DecimalFormat("00");
+                String date = i+"-"+mFormat.format(Integer.valueOf(i1+1))+"-"+mFormat.format(Integer.valueOf(i2));
+//                System.out.println(date);
+                Intent intent=new Intent(CalendarActivity.this,DailyCaloriesActivity.class);
+                intent.putExtra("date",date);
+                startActivity(intent);
             }
         });
         BottomNavigationView bottomNavigationView = findViewById(R.id.menu);
