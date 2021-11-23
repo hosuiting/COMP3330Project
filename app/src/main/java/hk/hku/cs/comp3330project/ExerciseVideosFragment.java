@@ -45,7 +45,7 @@ public class ExerciseVideosFragment extends Fragment {
     private static final String ARG_PARAM1 = "btnValue";
 
     // TODO: Rename and change types of parameters
-    private int mParam1;
+    private int btnValue;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private PreviewView previewView;
 //    private ImageCapture imageCapture;
@@ -76,9 +76,9 @@ public class ExerciseVideosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
+            btnValue = getArguments().getInt(ARG_PARAM1);
 //            testField.setText(Integer.toString(mParam1));
-            Toast.makeText(getActivity(), Integer.toString(mParam1), Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), Integer.toString(btnValue), Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
         }
@@ -191,7 +191,7 @@ public class ExerciseVideosFragment extends Fragment {
             }
         });
         testField = view.findViewById(R.id.testField);
-        testField.setText(Integer.toString(mParam1));
+        testField.setText(Integer.toString(btnValue));
 
 
         return view;
