@@ -54,11 +54,13 @@ public class RegisterActivity extends AppCompatActivity {
             bodyfat.setVisibility(View.GONE);
             username_text.setVisibility(View.VISIBLE);
             age_text.setVisibility(View.VISIBLE);
-            if(mydata.getString("sex","")=="male"){
+            System.out.println(mydata.getString("sex",""));
+            if(mydata.getString("sex","").equals("male")){
                 Male_button.setChecked(true);
                 Female_button.setChecked(false);
+
             }
-            else if(mydata.getString("sex","")=="female"){
+            else if(mydata.getString("sex","").equals("female")){
                 Male_button.setChecked(false);
                 Female_button.setChecked(true);
             }
@@ -87,9 +89,11 @@ public class RegisterActivity extends AppCompatActivity {
                     editor.putString("age",age.getText().toString());
                     if(Male_button.isChecked()){
                         editor.putString("sex","male");
+
                     }
                     else if(Female_button.isChecked()){
                         editor.putString("sex","female");
+
                     }
                     editor.commit();
                     startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
