@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class ExerciseSelectActivity extends AppCompatActivity {
 
@@ -12,7 +13,8 @@ public class ExerciseSelectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise_select);
     }
-    public void Imagebuttonclicked(View view){
 
+    public void Imagebuttonclicked(View view) {
+        Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show();
     }
 }
