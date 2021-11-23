@@ -8,50 +8,59 @@
     tools:context=".ChatbotActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idRVChats"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/idRVChats"
-        android:layout_above="@id/idRlMsg"
-        />
+        android:layout_above="@id/idRlMsg" />
+
     <RelativeLayout
+        android:id="@+id/idRlMsg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/idRlMsg"
-        >
+        android:layout_above="@id/menu"
+        android:layout_alignParentBottom="false">
+
         <EditText
+            android:id="@+id/idEditMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ask something to FitIN AI"
-            android:textColorHint="@color/white"
-            android:id="@+id/idEditMessage"
-            android:textColor="@color/white"
-            android:layout_margin="3dp"
             android:layout_centerInParent="true"
+            android:layout_margin="3dp"
             android:layout_toLeftOf="@id/idFABMic"
-            android:singleLine="true">
-        </EditText>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_mic_off"
-            android:id="@+id/idFABMic"
-            android:layout_margin="4dp"
-            app:fabCustomSize="45dp"
-            app:backgroundTint="@color/fab_color"
-            app:tint="@color/white"
-            android:layout_toLeftOf="@id/idFABSend" />
+            android:hint="Ask something to FitIN AI"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"></EditText>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/idFABMic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_toLeftOf="@id/idFABSend"
+            android:src="@drawable/ic_mic_off"
+            app:backgroundTint="@color/fab_color"
+            app:fabCustomSize="45dp"
+            app:tint="@color/white" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/idFABSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_send"
-            android:id="@+id/idFABSend"
+            android:layout_alignParentRight="true"
             android:layout_margin="4dp"
-            app:fabCustomSize="45dp"
+            android:src="@drawable/ic_send"
             app:backgroundTint="@color/fab_color"
-            app:tint="@color/white"
-            android:layout_alignParentRight="true"/>
+            app:fabCustomSize="45dp"
+            app:tint="@color/white" />
     </RelativeLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/bottom_menu" />
+
 </RelativeLayout>

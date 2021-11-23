@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button toChatroom;
     private Button toBody;
     private TextView Greet;
-    private Button toRegister;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +57,7 @@ public class HomeActivity extends AppCompatActivity {
         Greet = (TextView)findViewById(R.id.Greet);
         SharedPreferences mydata = getSharedPreferences("mydata", Context.MODE_PRIVATE);
         Greet.setText("Hi "+mydata.getString("username",""));
-        toRegister=(Button)findViewById(R.id.toRegister);
-        toRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this,RegisterActivity.class));
-            }
-        });
+
         toCaloriesCal=(Button) findViewById(R.id.toCaloriesCal);
         toCaloriesCal.setOnClickListener(new View.OnClickListener() {
             @Override

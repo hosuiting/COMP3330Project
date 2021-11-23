@@ -51,13 +51,6 @@
                             android:text="ExerciseSelect" />
 
                         <Button
-                            android:id="@+id/toRegister"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="register test" />
-
-                        <Button
                             android:id="@+id/toCaloriesCal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

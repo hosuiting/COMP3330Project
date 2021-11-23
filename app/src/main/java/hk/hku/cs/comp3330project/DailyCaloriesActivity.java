@@ -1,5 +1,6 @@
 package hk.hku.cs.comp3330project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -9,10 +10,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.w3c.dom.Text;
 
@@ -48,6 +53,25 @@ public class DailyCaloriesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_calories);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.menu);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(DailyCaloriesActivity.this,HomeActivity.class));
+                        break;
+                    case R.id.profile:
+                        startActivity(new Intent(DailyCaloriesActivity.this,RegisterActivity.class));
+                        break;
+                    case R.id.chatbot:
+                        startActivity(new Intent(DailyCaloriesActivity.this,ChatbotActivity.class));
+                        break;
+                }
+
+                return false;
+            }
+        });
         tomorrow = (Button)findViewById(R.id.tomorrow);
         SharedPreferences mydata = getSharedPreferences("mydata", Context.MODE_PRIVATE);
         date_display=(TextView) findViewById(R.id.date_display) ;

@@ -4,11 +4,13 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
@@ -16,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,6 +28,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -86,6 +91,25 @@ public class BodyMainFragment extends Fragment {
         if (sqliteHelper == null) {
             sqliteHelper = new BodyStatSQLiteHelper(getActivity());
         }
+//        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.menu);
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.home:
+////                        startActivity(new Intent(CalendarActivity.this,HomeActivity.class));
+//                        break;
+//                    case R.id.profile:
+////                        startActivity(new Intent(CalendarActivity.this,RegisterActivity.class));
+//                        break;
+//                    case R.id.chatbot:
+////                        startActivity(new Intent(CalendarActivity.this,ChatbotActivity.class));
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);

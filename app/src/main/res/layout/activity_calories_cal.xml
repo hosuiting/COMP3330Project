@@ -7,6 +7,13 @@
     tools:context=".CaloriesCalActivity"
     tools:visibility="visible">
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_menu" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

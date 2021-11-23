@@ -1,5 +1,6 @@
 package hk.hku.cs.comp3330project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,12 +13,15 @@ import android.speech.RecognitionListener;
 import android.speech.RecognitionService;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -55,6 +59,25 @@ public class ChatbotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatbot);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.menu);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(ChatbotActivity.this,HomeActivity.class));
+                        break;
+                    case R.id.profile:
+                        startActivity(new Intent(ChatbotActivity.this,RegisterActivity.class));
+                        break;
+                    case R.id.chatbot:
+
+                        break;
+                }
+
+                return false;
+            }
+        });
         chatsRV = findViewById(R.id.idRVChats);
         userMsgEdit = findViewById(R.id.idEditMessage);
         sendMsgFAB = findViewById(R.id.idFABSend);

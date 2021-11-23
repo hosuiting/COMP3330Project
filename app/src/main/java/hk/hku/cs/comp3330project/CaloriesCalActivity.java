@@ -1,5 +1,6 @@
 package hk.hku.cs.comp3330project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -8,10 +9,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class CaloriesCalActivity extends AppCompatActivity {
     private Button beef_button;
@@ -49,6 +54,25 @@ public class CaloriesCalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_calories_cal);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.menu);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(CaloriesCalActivity.this,HomeActivity.class));
+                        break;
+                    case R.id.profile:
+                        startActivity(new Intent(CaloriesCalActivity.this,RegisterActivity.class));
+                        break;
+                    case R.id.chatbot:
+                        startActivity(new Intent(CaloriesCalActivity.this,ChatbotActivity.class));
+                        break;
+                }
+
+                return false;
+            }
+        });
         Bundle extras = getIntent().getExtras();
         if (extras!=null){
           time=extras.getString("time");

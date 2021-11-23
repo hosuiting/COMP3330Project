@@ -7,12 +7,18 @@ import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.os.Bundle;import androidx.camera.lifecycle.ProcessCameraProvider;
+import android.os.Bundle;
+import android.view.MenuItem;
+
+import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutionException;
@@ -27,7 +33,25 @@ public class ExerciseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         checkPermission();
         setContentView(R.layout.activity_exercise);
-
+//        BottomNavigationView bottomNavigationView = findViewById(R.id.menu);
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.home:
+//                        startActivity(new Intent(ExerciseActivity.this,HomeActivity.class));
+//                        break;
+//                    case R.id.profile:
+//                        startActivity(new Intent(ExerciseActivity.this,RegisterActivity.class));
+//                        break;
+//                    case R.id.chatbot:
+//                        startActivity(new Intent(ExerciseActivity.this,ChatbotActivity.class));
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
     }
 
     private void checkPermission() {
