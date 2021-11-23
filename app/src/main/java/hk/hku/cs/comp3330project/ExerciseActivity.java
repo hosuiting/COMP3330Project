@@ -11,11 +11,15 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -26,13 +30,13 @@ import java.util.concurrent.ExecutionException;
 
 public class ExerciseActivity extends AppCompatActivity {
     private static final int MULTIPLE_PERMISSIONS = 5;
-    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
-
+    private int[] idArray;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkPermission();
         setContentView(R.layout.activity_exercise);
+
 //        BottomNavigationView bottomNavigationView = findViewById(R.id.menu);
 //        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
 //            @Override
@@ -52,6 +56,10 @@ public class ExerciseActivity extends AppCompatActivity {
 //                return false;
 //            }
 //        });
+
+        idArray = new int[] {R.id.crab_toe_touch, R.id.good_morning, R.id.high_knees_poses, R.id.inchworm, R.id.leg_pull_in,
+                        R.id.lunge_with_twist, R.id.russian_twist, R.id.side_lunge, R.id.spiderman_exercise, R.id.narrow_push_up};
+
     }
 
     private void checkPermission() {
@@ -111,5 +119,17 @@ public class ExerciseActivity extends AppCompatActivity {
                 }
 
         }
+    }
+    public void Imagebuttonclicked(View view) {
+        Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show();
+        int index = 0;
+        while (index < idArray.length) {
+            if (idArray[index] == view.getId())
+                break;
+            index++;
+        }
+        Bundle args = new Bundle();
+        args.putInt("btnValue", index);
+        Navigation.findNavController(view).navigate(R.id.action_exerciseListFragment_to_exerciseVideosFragment, args);
     }
 }

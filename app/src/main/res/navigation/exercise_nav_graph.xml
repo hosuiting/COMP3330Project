@@ -3,11 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/exercise_nav_graph"
-    app:startDestination="@id/exerciseVideosFragment">
+    app:startDestination="@id/exerciseListFragment">
 
+    <fragment
+        android:id="@+id/exerciseListFragment"
+        android:name="hk.hku.cs.comp3330project.ExerciseListFragment"
+        android:label="fragment_exercise_list"
+        tools:layout="@layout/fragment_exercise_list" >
+        <action
+            android:id="@+id/action_exerciseListFragment_to_exerciseVideosFragment"
+            app:destination="@id/exerciseVideosFragment">
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/exerciseVideosFragment"
         android:name="hk.hku.cs.comp3330project.ExerciseVideosFragment"
         android:label="fragment_exercise_videos"
-        tools:layout="@layout/fragment_exercise_videos" />
+        tools:layout="@layout/fragment_exercise_videos" >
+        <action
+            android:id="@+id/action_exerciseVideosFragment_to_exerciseListFragment"
+            app:destination="@id/exerciseListFragment" />
+    </fragment>
+
 </navigation>

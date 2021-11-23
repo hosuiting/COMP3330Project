@@ -39,7 +39,7 @@ public class ExerciseSelectActivity extends AppCompatActivity {
         });
     }
 
-    public void Imagebuttonclicked(View view) {
-        Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show();
-    }
+//    public void Imagebuttonclicked(View view) {
+//        Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show();
+//    }
 }

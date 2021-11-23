@@ -1,17 +1,15 @@
 package hk.hku.cs.comp3330project;
 
 import android.annotation.SuppressLint;
-import android.content.ContentValues;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
-import androidx.camera.core.ImageCapture;
 import androidx.camera.core.Preview;
 import androidx.camera.core.VideoCapture;
 import androidx.camera.lifecycle.ProcessCameraProvider;
@@ -19,22 +17,19 @@ import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.navigation.Navigation;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.common.util.concurrent.ListenableFuture;
-
-import org.w3c.dom.Text;
 
 import java.util.concurrent.ExecutionException;
 
@@ -47,17 +42,16 @@ public class ExerciseVideosFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "btnValue";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int mParam1;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private PreviewView previewView;
 //    private ImageCapture imageCapture;
     private VideoCapture videoCapture;
-
+    private ProcessCameraProvider cameraProvider;
+    private TextView testField;
     public ExerciseVideosFragment() {
         // Required empty public constructor
     }
@@ -67,15 +61,13 @@ public class ExerciseVideosFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment ExerciseVideosFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ExerciseVideosFragment newInstance(String param1, String param2) {
+    public static ExerciseVideosFragment newInstance(int param1) {
         ExerciseVideosFragment fragment = new ExerciseVideosFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -84,9 +76,26 @@ public class ExerciseVideosFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam1 = getArguments().getInt(ARG_PARAM1);
+//            testField.setText(Integer.toString(mParam1));
+            Toast.makeText(getActivity(), Integer.toString(mParam1), Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
         }
+
+//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+//            @SuppressLint("RestrictedApi")
+//            @Override
+//            public void handleOnBackPressed() {
+//                // Handle the back button event
+//                if (videoCapture != null) {
+//                    videoCapture.stopRecording();
+//                    cameraProvider.unbindAll();
+//                    Navigation.findNavController(getView()).navigate(R.id.action_exerciseVideosFragment_to_exerciseListFragment);
+//                }
+//            }
+//        };
+//        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
     @SuppressLint("RestrictedApi")
@@ -94,7 +103,9 @@ public class ExerciseVideosFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_exercise_videos, container, false);
+
         previewView = view.findViewById(R.id.preview_view);
         view.findViewById(R.id.stopBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +128,7 @@ public class ExerciseVideosFragment extends Fragment {
         cameraProviderFuture.addListener(() -> {
             try {
                 // Camera provider is now guaranteed to be available
-                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                cameraProvider = cameraProviderFuture.get();
 
                 // Set up the view finder use case to display camera preview
                 Preview preview = new Preview.Builder().build();
@@ -164,6 +175,7 @@ public class ExerciseVideosFragment extends Fragment {
 //        container.removeAllViewsInLayout();
 //        container.addView(videoBox);
         view.findViewById(R.id.dynamicAdd).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public void onClick(View v) {
 //                LinearLayout container = getView().findViewById(R.id.listContainer);
@@ -178,7 +190,8 @@ public class ExerciseVideosFragment extends Fragment {
                 recordVideo();
             }
         });
-
+        testField = view.findViewById(R.id.testField);
+        testField.setText(Integer.toString(mParam1));
 
 
         return view;
@@ -214,6 +227,16 @@ public class ExerciseVideosFragment extends Fragment {
                         }
                     }
             );
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (videoCapture != null) {
+            videoCapture.stopRecording();
+            cameraProvider.unbindAll();
         }
     }
 }

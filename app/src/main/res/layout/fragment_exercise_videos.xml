@@ -15,7 +15,9 @@
             android:layout_height="300dp"
             android:id="@+id/preview_view"
             />
+
         <TextView
+            android:id="@+id/testField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/hello_blank_fragment" />
