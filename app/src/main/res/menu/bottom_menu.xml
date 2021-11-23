@@ -11,6 +11,6 @@
         android:title="Profile" />
     <item
         android:id="@+id/chatbot"
-        android:icon="@drawable/chatbot"
+        android:icon="@drawable/ic_baseline_message_24"
         android:title="Chatbot" />
 </menu>
