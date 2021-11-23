@@ -8,9 +8,12 @@
     tools:context=".ExerciseSelectActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
+        app:title="Select some exercise to practise"
+        android:background="@color/design_default_color_primary_dark"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:textAlignment="textEnd"
+        app:titleTextColor="#FFF"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         />
     <LinearLayout
