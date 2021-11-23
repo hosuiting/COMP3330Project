@@ -24,6 +24,7 @@ import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity {
     private Button toCaloriesCal;
+    private Button toExerciseSelect;
     private Button toChatroom;
     private Button toBody;
     private TextView Greet;
@@ -96,6 +97,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,ExerciseActivity.class));
+            }
+        });
+        toExerciseSelect = findViewById(R.id.toExerciseSelect);
+        toExerciseSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,ExerciseSelectActivity.class));
             }
         });
     }

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.COMP3330Project"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ExerciseSelectActivity"
+            android:exported="true" />
+        <activity
             android:name=".CalendarActivity"
             android:exported="true" />
         <activity
