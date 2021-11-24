@@ -37,7 +37,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.concurrent.ExecutionException;
 
-import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 
 /**

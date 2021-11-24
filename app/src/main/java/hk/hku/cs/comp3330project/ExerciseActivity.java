@@ -19,14 +19,11 @@ import android.widget.Toast;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.common.util.concurrent.ListenableFuture;
 
-import java.util.concurrent.ExecutionException;
 
 
 public class ExerciseActivity extends AppCompatActivity {
