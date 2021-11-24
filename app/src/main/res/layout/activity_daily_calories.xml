@@ -35,6 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.2"
+                    android:backgroundTint="@color/black"
                     android:text="&lt;" />
 
                 <TextView
@@ -44,7 +45,7 @@
                     android:layout_weight="0.6"
                     android:text="Today"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -53,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.2"
+                    android:backgroundTint="@color/black"
                     android:text="&gt;" />
             </LinearLayout>
 
@@ -68,7 +70,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.7"
                     android:text="Breakfast  :  0.00kcal"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/breakfast_button"
@@ -76,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="0.3"
+                    android:backgroundTint="@color/black"
                     android:text="Edit" />
 
             </LinearLayout>
@@ -93,7 +96,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.7"
                     android:text="Lunch  :  0.00kcal"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/lunch_button"
@@ -101,6 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="0.3"
+                    android:backgroundTint="@color/black"
                     android:text="Edit" />
             </LinearLayout>
 
@@ -116,7 +120,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.7"
                     android:text="Dinner  :  0.00kcal"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/dinner_button"
@@ -124,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="0.3"
+                    android:backgroundTint="@color/black"
                     android:text="Edit" />
             </LinearLayout>
 
@@ -133,8 +138,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Additional calories intake"
-                android:textSize="20sp" />
+                android:text="Additional calories intake:"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/additional_kcal"
@@ -181,7 +186,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Back to calendar" />
+                android:text="Back to calendar"
+                android:backgroundTint="@color/black"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>
