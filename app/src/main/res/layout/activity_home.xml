@@ -30,6 +30,7 @@
                     android:id="@+id/horizontalScrollView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:scrollbars="none"
                     app:layout_constraintTop_toBottomOf="@+id/btn_text">
 
@@ -38,41 +39,114 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <Button
-                            android:id="@+id/toEcercise"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:text="Exercise" />
-
-                        <Button
-                            android:id="@+id/toExerciseSelect"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:text="ExerciseSelect" />
-
-                        <Button
-                            android:id="@+id/toCaloriesCal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:text="Daily Calories Record" />
-
-                        <Button
-                            android:id="@+id/goChatroom"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/tbody"
+                            android:layout_width="140dp"
+                            android:layout_height="120dp"
                             android:layout_marginLeft="10dp"
-                            android:text="Chatroom" />
+                            android:layout_marginRight="10dp"
+                            android:background="#2E7D32"
+                            android:orientation="vertical"
+                            android:padding="10dp">
 
-                        <Button
-                            android:id="@+id/toBody"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            <ImageView
+                                android:id="@+id/imageView6"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                app:srcCompat="@drawable/body_statistic" />
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:gravity="center"
+                                android:text="Body Stats"
+                                android:textColor="@color/white"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/tcal"
+                            android:layout_width="140dp"
+                            android:layout_height="120dp"
                             android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
-                            android:text="body" />
+                            android:layout_marginRight="10dp"
+                            android:background="#AD1457"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/imageView7"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                app:srcCompat="@drawable/calories_calculator" />
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:gravity="center"
+                                android:text="Calories "
+                                android:textColor="@color/white"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/texercise"
+                            android:layout_width="140dp"
+                            android:layout_height="120dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#1565C0"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/imageView5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="70dp"
+                                app:srcCompat="@drawable/exercise" />
+
+                            <TextView
+                                android:id="@+id/textView7"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:gravity="center"
+                                android:text="Exercise"
+                                android:textColor="@color/white"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/tchatbot"
+                            android:layout_width="140dp"
+                            android:layout_height="120dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:background="#9E9D24"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/imageView8"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                app:srcCompat="@drawable/chatbot_icon" />
+
+                            <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:gravity="center"
+                                android:text="Chatbot"
+                                android:textColor="@color/white"
+                                android:textSize="24sp" />
+                        </LinearLayout>
 
                     </LinearLayout>
                 </HorizontalScrollView>
@@ -134,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
-                    android:text="Hi Zyron"
+                    android:text="Hi "
                     android:textColor="#EF3469"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -212,8 +286,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/horizontalScrollView2"
-                    app:layout_constraintVertical_bias="0.197" />
+                    app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2"
+                    app:layout_constraintVertical_bias="0.128" />
 
                 <TextView
                     android:id="@+id/greet"

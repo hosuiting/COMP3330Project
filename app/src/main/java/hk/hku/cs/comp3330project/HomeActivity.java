@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,10 +24,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity {
-    private Button toCaloriesCal;
-    private Button toExerciseSelect;
-    private Button toChatroom;
-    private Button toBody;
+    private LinearLayout toCaloriesCal;
+    private LinearLayout toExerciseSelect;
+    private LinearLayout toChatroom;
+    private LinearLayout toBody;
     private TextView Greet;
 
 
@@ -58,7 +59,7 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences mydata = getSharedPreferences("mydata", Context.MODE_PRIVATE);
         Greet.setText("Hi "+mydata.getString("username",""));
 
-        toCaloriesCal=(Button) findViewById(R.id.toCaloriesCal);
+        toCaloriesCal=(LinearLayout) findViewById(R.id.tcal);
         toCaloriesCal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,14 +73,14 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this,CalendarActivity.class));
             }
         });
-        toChatroom=(Button) findViewById(R.id.goChatroom);
+        toChatroom=(LinearLayout) findViewById(R.id.tchatbot); ;
         toChatroom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this,ChatbotActivity.class));
             }
         });
-        toBody=(Button) findViewById(R.id.toBody);
+        toBody=(LinearLayout) findViewById(R.id.tbody);
         toBody.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,18 +88,18 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.toEcercise).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.texercise).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,ExerciseActivity.class));
             }
         });
-        toExerciseSelect = findViewById(R.id.toExerciseSelect);
-        toExerciseSelect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,ExerciseSelectActivity.class));
-            }
-        });
+//        toExerciseSelect = findViewById(R.id.toExerciseSelect);
+//        toExerciseSelect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(HomeActivity.this,ExerciseSelectActivity.class));
+//            }
+//        });
     }
 }
