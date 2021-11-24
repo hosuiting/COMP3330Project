@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ExerciseSelectActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:title="Select some exercise to practise"
-        android:background="@color/design_default_color_primary_dark"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/black"
         android:textAlignment="textEnd"
-        app:titleTextColor="#FFF"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        />
+        app:title="Select some exercise to practise"
+        app:titleTextColor="#FFF" />
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

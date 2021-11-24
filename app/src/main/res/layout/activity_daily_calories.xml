@@ -10,14 +10,15 @@
         android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView4"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_menu" />
 
     <ScrollView
         android:id="@+id/scrollView4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="22dp">
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.2"
+                    android:backgroundTint="@color/black"
                     android:text="&lt;" />
 
                 <TextView
@@ -44,7 +46,7 @@
                     android:layout_weight="0.6"
                     android:text="Today"
                     android:textAlignment="center"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <Button
@@ -53,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:layout_weight="0.2"
+                    android:backgroundTint="@color/black"
                     android:text="&gt;" />
             </LinearLayout>
 
@@ -68,7 +71,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.7"
                     android:text="Breakfast  :  0.00kcal"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/breakfast_button"
@@ -76,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="0.3"
+                    android:backgroundTint="@color/black"
                     android:text="Edit" />
 
             </LinearLayout>
@@ -93,7 +97,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.7"
                     android:text="Lunch  :  0.00kcal"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/lunch_button"
@@ -101,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="0.3"
+                    android:backgroundTint="@color/black"
                     android:text="Edit" />
             </LinearLayout>
 
@@ -116,7 +121,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="0.7"
                     android:text="Dinner  :  0.00kcal"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
                 <Button
                     android:id="@+id/dinner_button"
@@ -124,6 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="0.3"
+                    android:backgroundTint="@color/black"
                     android:text="Edit" />
             </LinearLayout>
 
@@ -133,8 +139,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Additional calories intake"
-                android:textSize="20sp" />
+                android:text="Additional calories intake:"
+                android:textSize="24sp" />
 
             <EditText
                 android:id="@+id/additional_kcal"
@@ -176,12 +182,31 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/limit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="You have exceeded your daily calories limit. Please try to lower your intake next time."
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="20sp" />
+
             <Button
                 android:id="@+id/toCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Back to calendar" />
+                android:backgroundTint="@color/black"
+                android:text="Back to calendar"
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>

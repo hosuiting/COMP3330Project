@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +18,9 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import org.w3c.dom.Text;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -49,6 +45,7 @@ public class DailyCaloriesActivity extends AppCompatActivity {
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private Date today;
     private Button toCalendar;
+    private TextView limit,warning;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +97,10 @@ public class DailyCaloriesActivity extends AppCompatActivity {
         total_kcal = (TextView)  findViewById(R.id.total_kcal);
         yesterday = (Button)findViewById(R.id.yesterday);
         toCalendar = (Button)findViewById(R.id.toCalendar);
+        limit = (TextView)findViewById(R.id.limit);
+        limit.setText("Your daily calories limit: "+ mydata.getString("limit","2200") +" kcal");
+        warning = (TextView)findViewById(R.id.warning);
+        warning.setVisibility(View.GONE);
 
         breakfast_kcal.setText("Breakfast : "+String.format("%.2f",breakfast_kcal_value)+"kcal");
         lunch_kcal.setText("Lunch  : "+String.format("%.2f",lunch_kcal_value)+"kcal");
@@ -108,6 +109,9 @@ public class DailyCaloriesActivity extends AppCompatActivity {
             additional_kcal.setText(String.format("%.2f", additional_kcal_value));
         }
         total_kcal_value=breakfast_kcal_value+lunch_kcal_value+dinner_kcal_value+additional_kcal_value;
+        if(total_kcal_value > Double.parseDouble(mydata.getString("limit","2200"))){
+            warning.setVisibility(View.VISIBLE);
+        }
         total_kcal.setText(String.format("%.2f",total_kcal_value)+"kcal");
 
         toCalendar.setOnClickListener(new View.OnClickListener() {
@@ -165,6 +169,9 @@ public class DailyCaloriesActivity extends AppCompatActivity {
                 editor.putLong(date+"additional",Double.doubleToLongBits(additional_kcal_value));
                 editor.commit();
                 total_kcal_value=breakfast_kcal_value+lunch_kcal_value+dinner_kcal_value+additional_kcal_value;
+                if(total_kcal_value > Double.parseDouble(mydata.getString("limit","2200"))){
+                    warning.setVisibility(View.VISIBLE);
+                }
                 total_kcal.setText(String.format("%.2f",total_kcal_value)+"kcal");
             }
 
@@ -207,6 +214,7 @@ public class DailyCaloriesActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 }

@@ -90,9 +90,11 @@ public class RegisterActivity extends AppCompatActivity {
                     if(Male_button.isChecked()){
                         editor.putString("sex","male");
 
+
                     }
                     else if(Female_button.isChecked()){
                         editor.putString("sex","female");
+
 
                     }
                     editor.commit();
@@ -115,9 +117,11 @@ public class RegisterActivity extends AppCompatActivity {
                             editor.putString("age",age.getText().toString());
                             if(Male_button.isChecked()){
                                 editor.putString("sex","male");
+                                editor.putString("limit","2500");
                             }
                             else if(Female_button.isChecked()){
                                 editor.putString("sex","female");
+                                editor.putString("limit","2000");
                             }
                             editor.commit();
                             BodyStatSQLiteHelper putdb = new BodyStatSQLiteHelper(RegisterActivity.this);
