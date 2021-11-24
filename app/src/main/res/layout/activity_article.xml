@@ -13,7 +13,7 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="60dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,8 +24,8 @@
             android:id="@+id/textView_articleTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Article Title"
             android:gravity="center"
+            android:text="Article Title"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <ImageView
@@ -53,8 +53,8 @@
                 android:id="@+id/button_like"
                 android:layout_width="1dp"
                 android:layout_height="29dp"
-                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
+                android:layout_weight="1"
                 tools:srcCompat="@drawable/heart_before_like" />
 
         </LinearLayout>
@@ -80,5 +80,11 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
