@@ -42,15 +42,14 @@
             android:exported="true" />
         <activity
             android:name=".BodyActivity"
-            android:exported="true">
-            android:windowSoftInputMode="adjustPan"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
         <activity
             android:name=".DailyCaloriesActivity"
             android:exported="true"
@@ -78,7 +77,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ArticleSearchResultsActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

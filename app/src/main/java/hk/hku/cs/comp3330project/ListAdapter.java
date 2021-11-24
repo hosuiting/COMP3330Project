@@ -10,11 +10,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.firebase.crashlytics.buildtools.reloc.javax.annotation.Nonnull;
+import java.util.ArrayList;
 
 public class ListAdapter extends ArrayAdapter<Article> {
 
-    public ListAdapter(Context context, Arraylist<Article> articleArraylist) {
+    public ListAdapter(Context context, ArrayList<Article> articleArraylist) {
         super(context, R.layout.list_item, articleArraylist);
     }
 
