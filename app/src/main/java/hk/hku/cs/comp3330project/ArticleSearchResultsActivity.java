@@ -16,7 +16,7 @@ import hk.hku.cs.comp3330project.databinding.ActivityMainBinding;
 
 public class ArticleSearchResultsActivity extends ListActivity {
 
-    ArrayList< Map<String, Object> > list = new ArrayList<Map<StringA, Object>>();
+    ArrayList< Map<String, Object> > list = new ArrayList<Map<String, Object>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
