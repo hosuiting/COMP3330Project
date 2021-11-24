@@ -6,12 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
 
     <application
         android:allowBackup="true"
@@ -21,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.COMP3330Project"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ArticleSearchResultsActivity"
+            android:exported="true" />
         <activity
             android:name=".ExerciseSelectActivity"
             android:exported="true" />
@@ -50,10 +54,9 @@
         <activity
             android:name=".DailyCaloriesActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ChatbotActivity"
-
             android:exported="true" />
         <activity
             android:name=".NutrientsActivity"
@@ -61,7 +64,7 @@
         <activity
             android:name=".CaloriesCalActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ArticleActivity"
             android:exported="true" />
