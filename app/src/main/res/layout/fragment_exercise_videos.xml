@@ -12,11 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <LinearLayout
                 android:id='@+id/listContainer'
                 android:layout_width="match_parent"
@@ -66,14 +61,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Timer" />
+                        android:text="Timer (60s)" />
 
-                    <TextView
-                        android:id="@+id/textView6"
+                    <Button
+                        android:id="@+id/dynamicAdd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Record" />
+                        android:text="Start recording" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -87,33 +81,20 @@
                         android:layout_height="300dp" />
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/testField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/hello_blank_fragment" />
+<!--                <Button-->
+<!--                    android:id="@+id/stopBtn"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Stop recording" />-->
 
-                <Button
-                    android:id="@+id/dynamicAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Start recording" />
-
-                <Button
-                    android:id="@+id/stopBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Stop recording" />
-
-                <Button
-                    android:id="@+id/button8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Button" />
+<!--                <Button-->
+<!--                    android:id="@+id/button8"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Button" />-->
 
             </LinearLayout>
 
-        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
