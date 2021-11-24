@@ -68,14 +68,16 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.5"
                 android:gravity="right"
-                android:text="Height:" />
+                android:text="Height:"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/heightTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -91,14 +93,16 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.5"
                 android:gravity="right"
-                android:text="Weight:" />
+                android:text="Weight:"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/weightTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -113,7 +117,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.5"
                 android:gravity="right"
-                android:text="BMI:" />
+                android:text="BMI:"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/bmiTextField"
@@ -121,7 +126,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
 
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -137,13 +143,16 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="0.5"
                 android:gravity="right"
-                android:text="Body Fat:" />
+                android:text="Body Fat:"
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/bodyFatTextField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -164,8 +173,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:text="TextView"
-                android:textSize="12sp"
-                />
+                android:textSize="16sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -176,6 +184,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/black"
         android:text="Record Data"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
