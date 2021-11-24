@@ -1,6 +1,7 @@
 package hk.hku.cs.comp3330project;
 
 import android.annotation.SuppressLint;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -30,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
@@ -50,13 +52,17 @@ public class ExerciseVideosFragment extends Fragment {
     private int btnValue;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private PreviewView previewView;
+    private VideoView playback_view;
 //    private ImageCapture imageCapture;
     private VideoCapture videoCapture;
     private ProcessCameraProvider cameraProvider;
-    private boolean btnIsStart = true;
+    private int btnState;
     private Button recordControlBtn;
     private TextView TimerTextView;
     private CountDownTimer timer;
+    private File savedFile;
+    private int seekTime;
+
     public ExerciseVideosFragment() {
         // Required empty public constructor
     }
@@ -74,7 +80,7 @@ public class ExerciseVideosFragment extends Fragment {
         } else {
             Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
         }
-
+        btnState = 0;
 
 //        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
 //            @SuppressLint("RestrictedApi")
@@ -100,7 +106,8 @@ public class ExerciseVideosFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_exercise_videos, container, false);
 
         previewView = view.findViewById(R.id.preview_view);
-
+        playback_view = view.findViewById(R.id.playback_view);
+        playback_view.setVisibility(View.GONE);
 //        previewView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -182,10 +189,11 @@ public class ExerciseVideosFragment extends Fragment {
 //                    }
 //                });
 //                container.addView(videoBox);
-                if (btnIsStart) {
+
+                if (btnState == 0) {
                     recordVideo();
                     recordControlBtn.setText("Stop Recording");
-                    btnIsStart = false;
+                    btnState = 1;
                     timer = new CountDownTimer(60000, 1000) {
 
                         @Override
@@ -198,11 +206,22 @@ public class ExerciseVideosFragment extends Fragment {
                             TimerTextView.setText("Time's Up!");
                         }
                     }.start();
-                } else {
+                } else if (btnState == 1) {
                     videoCapture.stopRecording();
                     timer.cancel();
                     recordControlBtn.setText("Start Recording");
-                    btnIsStart = true;
+                    btnState = 0;
+                } else if (btnState == 2) {
+                    // stop video
+                    playback_view.pause();
+                    seekTime = playback_view.getCurrentPosition();
+                    recordControlBtn.setText("Video Paused");
+                    btnState = 3;
+                } else if (btnState == 3) {
+                    btnState = 2;
+                    playback_view.start();
+                    playback_view.seekTo(seekTime);
+                    recordControlBtn.setText("Playing Video");
                 }
 
             }
@@ -252,7 +271,7 @@ public class ExerciseVideosFragment extends Fragment {
             if (!movieDir.exists())
                 movieDir.mkdir();
 
-            File videoFile = new File(movieDir, name);
+            final File videoFile = new File(movieDir, name);
             Toast.makeText(getActivity(), videoFile.toString(), Toast.LENGTH_SHORT).show();
             videoCapture.startRecording(
                     new VideoCapture.OutputFileOptions.Builder(videoFile).build(),
@@ -261,6 +280,22 @@ public class ExerciseVideosFragment extends Fragment {
                         @Override
                         public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
                             Toast.makeText(getActivity(), "Video saved", Toast.LENGTH_LONG).show();
+                            savedFile = videoFile;
+                            previewView.setVisibility(View.GONE);
+                            playback_view.setVisibility(View.VISIBLE);
+                            playback_view.setVideoPath(savedFile.toString());
+                            playback_view.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
+                                    btnState = 0;
+                                    recordControlBtn.setText("Start Recording");
+                                    previewView.setVisibility(View.VISIBLE);
+                                    playback_view.setVisibility(View.GONE);
+                                }
+                            });
+                            btnState = 2;
+                            playback_view.start();
+                            recordControlBtn.setText("Playing Video");
                         }
 
                         @Override
