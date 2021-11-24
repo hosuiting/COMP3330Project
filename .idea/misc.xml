@@ -15,6 +15,7 @@
         <entry key="..\:/Users/hosuiting/Desktop/COMP3330/COMP3330Project/app/src/main/res/layout/activity_intro.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/hosuiting/Desktop/COMP3330/COMP3330Project/app/src/main/res/layout/activity_main.xml" value="0.22" />
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <entry key="..\:/software/AndroidStudioProjects/COMP3330Project/app/src/main/res/layout/activity_article.xml" value="0.2509057971014493" />
         <entry key="..\:/software/AndroidStudioProjects/COMP3330Project/app/src/main/res/layout/activity_calories_cal.xml" value="0.24456521739130435" />
         <entry key="..\:/software/AndroidStudioProjects/COMP3330Project/app/src/main/res/layout/activity_daily_calories.xml" value="0.3625" />
@@ -23,6 +24,10 @@
 =======
         <entry key="..\:/Users/hosuiting/Desktop/COMP3330/COMP3330Project/app/src/main/res/layout/bot_msg_box.xml" value="0.1513157894736842" />
         <entry key="..\:/Users/hosuiting/Desktop/COMP3330/COMP3330Project/app/src/main/res/layout/user_msg_box.xml" value="0.3333333333333333" />
+>>>>>>> Stashed changes
+=======
+        <entry key="app/src/main/res/layout/activity_article.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_nutrients.xml" value="1.1159420289855073" />
 >>>>>>> Stashed changes
       </map>
     </option>

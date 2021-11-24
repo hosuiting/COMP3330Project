@@ -66,9 +66,6 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".ArticleActivity"
-            android:exported="true" />
-        <activity
             android:name=".HomeActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
