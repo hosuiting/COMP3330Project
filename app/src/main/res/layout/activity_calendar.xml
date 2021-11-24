@@ -10,6 +10,7 @@
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toTopOf="@id/menu"
         tools:layout_editor_absoluteX="16dp">
 
@@ -44,6 +45,22 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp" />
+
+            <TextView
+                android:id="@+id/limit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Your daily calories limit:"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/limit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/black"
+                android:text="Change my calories limit" />
         </LinearLayout>
     </ScrollView>
 
@@ -51,6 +68,6 @@
         android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
