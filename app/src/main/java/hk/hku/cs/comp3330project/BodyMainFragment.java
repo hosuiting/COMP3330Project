@@ -131,34 +131,34 @@ public class BodyMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_body_main, container, false);
-        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_testFragment_to_homeActivity2);
-            }
-        });
+//        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Navigation.findNavController(view).navigate(R.id.action_testFragment_to_homeActivity2);
+//            }
+//        });
 
         orderedTextView = new TextView[5];
         for (int i = 0; i < preference_keys.length; ++i) {
             orderedTextView[i] = (TextView)view.findViewById(textViewIds[i]);
         }
         updateTextFields();
-        view.findViewById(R.id.button4).setOnClickListener(v -> {
-            ArrayList<String> records = sqliteHelper.getRecordFromDateRange("2021-11-20", "2021-11-20");
-            for (String record : records) {
-                Toast.makeText(getActivity(), record, Toast.LENGTH_SHORT).show();
-
-            }
-
-        });
-        view.findViewById(R.id.button2).setOnClickListener(view1 -> {
-            Context context = getActivity();
-            String[] latest = sqliteHelper.getLatestStatistics();
-            for (String received: latest) {
-                Toast.makeText(context, received, Toast.LENGTH_SHORT).show();
-            }
-
-        });
+//        view.findViewById(R.id.button4).setOnClickListener(v -> {
+//            ArrayList<String> records = sqliteHelper.getRecordFromDateRange("2021-11-20", "2021-11-20");
+//            for (String record : records) {
+//                Toast.makeText(getActivity(), record, Toast.LENGTH_SHORT).show();
+//
+//            }
+//
+//        });
+//        view.findViewById(R.id.button2).setOnClickListener(view1 -> {
+//            Context context = getActivity();
+//            String[] latest = sqliteHelper.getLatestStatistics();
+//            for (String received: latest) {
+//                Toast.makeText(context, received, Toast.LENGTH_SHORT).show();
+//            }
+//
+//        });
         view.findViewById(R.id.button3).setOnClickListener(view12 -> {
             Context context = getActivity();
             AlertDialog.Builder dialog = new AlertDialog.Builder(context);

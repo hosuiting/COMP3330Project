@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,25 +38,24 @@ public class ExerciseActivity extends AppCompatActivity {
         checkPermission();
         setContentView(R.layout.activity_exercise);
 
-//        BottomNavigationView bottomNavigationView = findViewById(R.id.menu);
-//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()){
-//                    case R.id.home:
-//                        startActivity(new Intent(ExerciseActivity.this,HomeActivity.class));
-//                        break;
-//                    case R.id.profile:
-//                        startActivity(new Intent(ExerciseActivity.this,RegisterActivity.class));
-//                        break;
-//                    case R.id.chatbot:
-//                        startActivity(new Intent(ExerciseActivity.this,ChatbotActivity.class));
-//                        break;
-//                }
-//
-//                return false;
-//            }
-//        });
+        ((BottomNavigationView) findViewById(R.id.menu)).setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(ExerciseActivity.this,HomeActivity.class));
+                        break;
+                    case R.id.profile:
+                        startActivity(new Intent(ExerciseActivity.this,RegisterActivity.class));
+                        break;
+                    case R.id.chatbot:
+                        startActivity(new Intent(ExerciseActivity.this,ChatbotActivity.class));
+                        break;
+                }
+
+                return false;
+            }
+        });
 
         idArray = new int[] {R.id.crab_toe_touch, R.id.good_morning, R.id.high_knees_poses, R.id.inchworm, R.id.leg_pull_in,
                         R.id.lunge_with_twist, R.id.russian_twist, R.id.side_lunge, R.id.spiderman_exercise, R.id.narrow_push_up};
