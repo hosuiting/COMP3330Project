@@ -194,8 +194,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         Intent intent = new Intent(getBaseContext(), ArticleSearchResultsActivity.class);
-        intent.putStringArrayListExtra("Title", title);
-        intent.putStringArrayListExtra("Date", date);
+        intent.putStringArrayListExtra("title", title);
+        intent.putStringArrayListExtra("date", date);
         startActivity(intent);
     }
 

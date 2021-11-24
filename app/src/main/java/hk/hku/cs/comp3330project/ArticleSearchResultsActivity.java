@@ -16,23 +16,26 @@ import hk.hku.cs.comp3330project.databinding.ActivityMainBinding;
 
 public class ArticleSearchResultsActivity extends ListActivity {
 
-    ArrayList< Map<String, Object> > list = new ArrayList<Map<String, Object>>();
+    ArrayList< Map<String, Object> > list = new ArrayList<Map<StringA, Object>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent intent = this.getIntent();
-        ArrayList<String> titles = intent.getStringArrayListExtra("Titles");
-        ArrayList<String> dates = intent.getStringArrayListExtra("dates");
+        ArrayList<String> titles = intent.getStringArrayListExtra("title");
+        ArrayList<String> dates = intent.getStringArrayListExtra("date");
 
-        for (int i = 0; i < titles.size(); i++) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("Title", titles.get(i));
-            map.put("Date", dates.get(i));
+        if (titles != null) {
+            for (int i = 0; i < titles.size(); i++) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("title", titles.get(i));
+                map.put("date", dates.get(i));
+                list.add(map);
+            }
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"Title", "Date"}, new int[]{R.id.title, R.id.date});
+        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"title", "date"}, new int[]{R.id.articletitle, R.id.date});
         setListAdapter(adapter);
     }
 
