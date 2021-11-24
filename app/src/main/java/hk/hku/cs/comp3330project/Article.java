@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class Article extends AppCompatActivity {
-
+    boolean liked = false;
     String title, date;
 
     public Article(String title, String date) {
@@ -28,16 +28,16 @@ public class Article extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         button_like = findViewById(R.id.button_like);
-        final boolean liked = false;
+
 
         button_like.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 liked = !liked;
-                if(liked) {
-                    button_like.setBackgroundResource(R.drawable.heart_before_like);
-                } else if (!(liked)){
+                if (liked) {
+                    button_like.setBackgroundResource(R.drawable.heart_after_like);
+                } else {
                     button_like.setBackgroundResource(R.drawable.heart_before_like);
                 }
             }
