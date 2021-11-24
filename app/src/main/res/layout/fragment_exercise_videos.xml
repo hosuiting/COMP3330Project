@@ -32,12 +32,11 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:text="TextView"
-                    android:layout_marginRight="10dp"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/button5"
@@ -72,17 +71,18 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Timer (60s)"
-
                     android:layout_marginRight="10dp"
-                    android:textSize="16sp"
+                    android:layout_weight="1"
+
+                    android:text="Timer (60s)"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/dynamicAdd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
                     android:text="Start recording" />
             </LinearLayout>
 
