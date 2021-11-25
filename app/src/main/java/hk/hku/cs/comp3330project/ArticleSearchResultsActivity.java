@@ -5,7 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Array;
@@ -42,6 +46,22 @@ public class ArticleSearchResultsActivity extends ListActivity {
 
         SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"title", "date"}, new int[]{R.id.articletitle, R.id.date});
         setListAdapter(adapter);
+
+        ListView lv = getListView();
+        lv.setTextFilterEnabled(true);
+
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
+                // When clicked, show a toast with the TextView text
+//                Toast.makeText(ArticleSearchResultsActivity.this, ((TextView) view).getText(),
+//                        Toast.LENGTH_SHORT).show();
+                System.out.println("======================="+Integer.toString(position));
+            }
+        });
     }
 
 }
