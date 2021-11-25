@@ -58,24 +58,24 @@ public class Article extends AppCompatActivity {
             }
         });
 
-//        ((BottomNavigationView) findViewById(R.id.menu)).setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()){
-//                    case R.id.home:
-//                        startActivity(new Intent(Article.this,HomeActivity.class));
-//                        break;
-//                    case R.id.profile:
-//                        startActivity(new Intent(Article.this,RegisterActivity.class));
-//                        break;
-//                    case R.id.chatbot:
-//                        startActivity(new Intent(Article.this,ChatbotActivity.class));
-//                        break;
-//                }
-//
-//                return false;
-//            }
-//        });
+        ((BottomNavigationView) findViewById(R.id.menu)).setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        startActivity(new Intent(Article.this,HomeActivity.class));
+                        break;
+                    case R.id.profile:
+                        startActivity(new Intent(Article.this,RegisterActivity.class));
+                        break;
+                    case R.id.chatbot:
+                        startActivity(new Intent(Article.this,ChatbotActivity.class));
+                        break;
+                }
+
+                return false;
+            }
+        });
 
     }
 }
