@@ -123,6 +123,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v.getId() == R.id.SearchBtn) {
             String name = search_bar.getText().toString();
+            if (name == "") {
+                return;
+            }
             connect(name);
         }
     }
@@ -184,11 +187,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             JSONObject rootJSONObj = new JSONObject(JSONString);
-            String article = rootJSONObj.getString("article0");
-            title.add("title");
-            date.add("date");
-
-            //                   thumbnail.add();
+            JSONObject article = rootJSONObj.getJSONObject("article0");
+            title.add(article.getString("title"));
+            date.add(article.getString("date"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -206,8 +207,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         pdialog.setMessage("Connecting ...");
         pdialog.show();
 
-        final String url = "https://i.cs.hku.hk/~stho/comp3330/articleSearch.php?action=search&query=b" + (name.isEmpty() ? "" : "?action=insert&name=" + android.net.Uri.encode(name, "UTF-8"));
 
+        final String url = "https://i.cs.hku.hk/~stho/comp3330/articleSearch.php?action=search&query=" + android.net.Uri.encode(name, "UTF-8");
         ExecutorService executor = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
         executor.execute(new Runnable() {
@@ -217,6 +218,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 pdialog.setMessage("Before ...");
                 pdialog.show();
                 final String jsonString = getJsonPage(url);
+                System.out.println(jsonString);
                 if (jsonString.equals("Fail to login"))
                     success = false;
                 final boolean finalSuccess = success;
