@@ -18,6 +18,9 @@ public class Article extends AppCompatActivity {
     boolean liked = false;
     String title, date;
 
+    public Article() {
+
+    }
     public Article(String title, String date) {
         this.title = title;
         this.date = date;
@@ -34,7 +37,7 @@ public class Article extends AppCompatActivity {
         ArrayList<String> titles = intent.getStringArrayListExtra("title");
         ArrayList<String> dates = intent.getStringArrayListExtra("date");
         ArrayList<String> content = intent.getStringArrayListExtra("content");
-
+        System.out.println(content);
         button_like = findViewById(R.id.button_like);
 
 
@@ -51,24 +54,24 @@ public class Article extends AppCompatActivity {
             }
         });
 
-        ((BottomNavigationView) findViewById(R.id.menu)).setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.home:
-                        startActivity(new Intent(Article.this,HomeActivity.class));
-                        break;
-                    case R.id.profile:
-                        startActivity(new Intent(Article.this,RegisterActivity.class));
-                        break;
-                    case R.id.chatbot:
-                        startActivity(new Intent(Article.this,ChatbotActivity.class));
-                        break;
-                }
-
-                return false;
-            }
-        });
+//        ((BottomNavigationView) findViewById(R.id.menu)).setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.home:
+//                        startActivity(new Intent(Article.this,HomeActivity.class));
+//                        break;
+//                    case R.id.profile:
+//                        startActivity(new Intent(Article.this,RegisterActivity.class));
+//                        break;
+//                    case R.id.chatbot:
+//                        startActivity(new Intent(Article.this,ChatbotActivity.class));
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
 
     }
 }

@@ -26,6 +26,9 @@
             android:name=".ArticleSearchResultsActivity"
             android:exported="true" />
         <activity
+            android:name=".Article"
+            android:exported="true" />
+        <activity
             android:name=".ExerciseSelectActivity"
             android:exported="true" />
         <activity
