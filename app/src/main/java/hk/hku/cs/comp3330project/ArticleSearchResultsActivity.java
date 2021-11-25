@@ -30,6 +30,7 @@ public class ArticleSearchResultsActivity extends ListActivity {
         Intent intent = this.getIntent();
         ArrayList<String> titles = intent.getStringArrayListExtra("title");
         ArrayList<String> dates = intent.getStringArrayListExtra("date");
+        ArrayList<String> content = intent.getStringArrayListExtra("content");
 
         if (titles != null) {
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!Entered loop");
@@ -49,12 +50,14 @@ public class ArticleSearchResultsActivity extends ListActivity {
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
-
-
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                Intent intent = new Intent(getBaseContext(), Article.class);
+                intent.putStringArrayListExtra("title", titles);
+                intent.putStringArrayListExtra("date", dates);
+                intent.putStringArrayListExtra("content", content);
+                startActivity(intent);
 
                 // When clicked, show a toast with the TextView text
 //                Toast.makeText(ArticleSearchResultsActivity.this, ((TextView) view).getText(),
