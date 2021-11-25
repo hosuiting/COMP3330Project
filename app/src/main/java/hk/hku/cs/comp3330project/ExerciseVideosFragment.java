@@ -227,8 +227,8 @@ public class ExerciseVideosFragment extends Fragment {
         });
 //        testField = view.findViewById(R.id.testField);
 //        testField.setText(Integer.toString(btnValue));
-        Toast.makeText(getActivity(), Integer.toString(btnValue), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getActivity(), Integer.toString(getResources().getIdentifier(gifNameArray[btnValue], "drawable", "hk.hku.cs.comp3330project")), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), Integer.toString(btnValue), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), Integer.toString(getResources().getIdentifier(gifNameArray[btnValue], "drawable", "hk.hku.cs.comp3330project")), Toast.LENGTH_SHORT).show();
         if ((GifImageView) view.findViewById(R.id.gifImageView) == null) {
             Toast.makeText(getActivity(), "Cannot find gif view!", Toast.LENGTH_SHORT).show();
         } else {

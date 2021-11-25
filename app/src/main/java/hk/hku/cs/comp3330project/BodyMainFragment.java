@@ -192,7 +192,7 @@ public class BodyMainFragment extends Fragment {
                         if (!inputValue.matches("")) {
                             defaultInputs[i1] = inputValue;
                         }
-                        Toast.makeText(context, defaultInputs[i1], Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, defaultInputs[i1], Toast.LENGTH_SHORT).show();
                     }
                     if (sqliteHelper.addStatistics(defaultInputs) == -1) {
                         Toast.makeText(context, "Insertion Failed", Toast.LENGTH_SHORT).show();
@@ -226,7 +226,7 @@ public class BodyMainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Context context = getActivity();
-                Toast.makeText(context, "Graph clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Graph clicked", Toast.LENGTH_SHORT).show();
                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                 dialog.setTitle("Graph Settings");
 
@@ -309,7 +309,7 @@ public class BodyMainFragment extends Fragment {
                 String formatDate = String.format("%d-%d-%d", year, month + 1, dayOfMonth);
 //                tvSelectDate.setText(formatDate);
 //                timePicker(formatDate);
-                Toast.makeText(v.getContext(), formatDate, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(v.getContext(), formatDate, Toast.LENGTH_SHORT).show();
                 modifyDate.setText(formatDate);
             }
         }, year, month, dayOfMonth);
