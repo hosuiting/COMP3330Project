@@ -54,9 +54,9 @@ public class ArticleSearchResultsActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Intent intent = new Intent(getBaseContext(), Article.class);
-                intent.putStringArrayListExtra("title", titles);
-                intent.putStringArrayListExtra("date", dates);
-                intent.putStringArrayListExtra("content", content);
+                intent.putExtra("title", titles.get(position));
+                intent.putExtra("date", dates.get(position));
+                intent.putExtra("content", content.get(position));
                 startActivity(intent);
 
                 // When clicked, show a toast with the TextView text

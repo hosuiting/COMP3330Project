@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,10 +35,13 @@ public class Article extends AppCompatActivity {
         setContentView(R.layout.activity_article);
 
         Intent intent = this.getIntent();
-        ArrayList<String> titles = intent.getStringArrayListExtra("title");
-        ArrayList<String> dates = intent.getStringArrayListExtra("date");
-        ArrayList<String> content = intent.getStringArrayListExtra("content");
+        String titles = intent.getStringExtra("title");
+        String dates = intent.getStringExtra("date");
+        String content = intent.getStringExtra("content");
         System.out.println(content);
+        ((TextView) findViewById(R.id.textView_articleTitle)).setText(titles);
+        ((TextView) findViewById(R.id.article_details)).setText(dates);
+        ((TextView) findViewById(R.id.article_content)).setText(content);
         button_like = findViewById(R.id.button_like);
 
 
