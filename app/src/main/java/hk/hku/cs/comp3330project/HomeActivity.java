@@ -187,9 +187,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         try {
             JSONObject rootJSONObj = new JSONObject(JSONString);
-            JSONObject article = rootJSONObj.getJSONObject("article0");
-            title.add(article.getString("title"));
-            date.add(article.getString("date"));
+            JSONArray article = rootJSONObj.getJSONArray("article");
+            for (int i = 0; i < article.length(); ++i) {
+                JSONObject object = article.getJSONObject(i);
+                title.add(object.getString("title"));
+                date.add(object.getString("date"));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
