@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.ArrayList;
+
 public class Article extends AppCompatActivity {
     boolean liked = false;
     String title, date;
@@ -27,6 +29,12 @@ public class Article extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
+
+        Intent intent = this.getIntent();
+        ArrayList<String> titles = intent.getStringArrayListExtra("title");
+        ArrayList<String> dates = intent.getStringArrayListExtra("date");
+        ArrayList<String> content = intent.getStringArrayListExtra("content");
+
         button_like = findViewById(R.id.button_like);
 
 
