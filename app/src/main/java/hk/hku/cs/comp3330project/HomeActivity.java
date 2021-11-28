@@ -19,6 +19,7 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -202,6 +203,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         try {
             JSONObject rootJSONObj = new JSONObject(JSONString);
             JSONArray article = rootJSONObj.getJSONArray("article");
+            if (article.length() < 1) {
+                Toast.makeText(this, "No articles that match the keyword.", Toast.LENGTH_LONG);
+            }
             for (int i = 0; i < article.length(); ++i) {
                 JSONObject object = article.getJSONObject(i);
                 title.add(object.getString("title"));

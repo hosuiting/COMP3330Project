@@ -35,6 +35,12 @@ public class ArticleSearchResultsActivity extends ListActivity {
 
         if (titles != null) {
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!Entered loop");
+            System.out.println(titles.size());
+            if (titles.size() == 0) {
+                Toast.makeText(this, "No articles matching that keyword", Toast.LENGTH_LONG).show();
+                Intent returnintent = new Intent(getBaseContext(), HomeActivity.class);
+                startActivity(returnintent);
+            }
             for (int i = 0; i < titles.size(); i++) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("title", titles.get(i));
