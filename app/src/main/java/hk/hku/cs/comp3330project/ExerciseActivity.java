@@ -118,7 +118,7 @@ public class ExerciseActivity extends AppCompatActivity {
         }
     }
     public void Imagebuttonclicked(View view) {
-        Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "Clicked", Toast.LENGTH_LONG).show();
         int index = 0;
         while (index < idArray.length) {
             if (idArray[index] == view.getId())

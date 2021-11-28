@@ -17,6 +17,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -166,19 +167,27 @@ public class BodyMainFragment extends Fragment {
 //                dialog.setMessage("Something");
 
             LinearLayout layout = new LinearLayout(context);
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            layoutParams.setMargins(70, 10, 70, 0);
             layout.setOrientation(LinearLayout.VERTICAL);
 
             final EditText heightBox = new EditText(context);
             heightBox.setHint("Height (cm)");
-            layout.addView(heightBox);
+            heightBox.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            layout.addView(heightBox, layoutParams);
 
             final EditText weightBox = new EditText(context);
             weightBox.setHint("Weight (kg)");
-            layout.addView(weightBox);
+            weightBox.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            layout.addView(weightBox, layoutParams);
 
             final EditText fatBox = new EditText(context);
             fatBox.setHint("Body Fat (% Fat)");
-            layout.addView(fatBox);
+            fatBox.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            layout.addView(fatBox, layoutParams);
 
             dialog.setView(layout); // Again this is a set method, not add
             dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
@@ -197,11 +206,11 @@ public class BodyMainFragment extends Fragment {
                     if (sqliteHelper.addStatistics(defaultInputs) == -1) {
                         Toast.makeText(context, "Insertion Failed", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(context, "Succeed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "Succeed", Toast.LENGTH_SHORT).show();
                         updateTextFields();
                         updateGraph(null);
 
-                        Toast.makeText(context, "End", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(context, "End", Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -237,8 +246,12 @@ public class BodyMainFragment extends Fragment {
                 EditText fromDate = editable_date(context, "Date From");
                 EditText toDate = editable_date(context, "Date To");
 
-                layout.addView(fromDate);
-                layout.addView(toDate);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(70, 10, 70, 0);
+
+                layout.addView(fromDate, layoutParams);
+                layout.addView(toDate, layoutParams);
                 dialog.setView(layout); // Again this is a set method, not add
                 dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
