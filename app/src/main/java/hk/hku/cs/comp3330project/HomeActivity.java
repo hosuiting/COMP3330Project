@@ -45,6 +45,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout toExerciseSelect;
     private LinearLayout toChatroom;
     private LinearLayout toBody;
+    private LinearLayout farticle1;
     private TextView Greet;
     private Button SearchBtn;
     private EditText search_bar;
@@ -58,6 +59,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         SearchBtn = (Button) findViewById(R.id.SearchBtn);
         search_bar = (EditText) findViewById(R.id.search_bar);
         SearchBtn.setOnClickListener(this);
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -72,7 +74,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(new Intent(HomeActivity.this, ChatbotActivity.class));
                         break;
                 }
-
                 return false;
             }
         });
@@ -95,8 +96,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(HomeActivity.this, CalendarActivity.class));
             }
         });
+
         toChatroom = (LinearLayout) findViewById(R.id.tchatbot);
-        ;
         toChatroom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -115,6 +116,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, ExerciseActivity.class));
+            }
+        });
+
+        //Featured articles button
+        //Intent intent = this.getIntent();
+        farticle1 = (LinearLayout) findViewById(R.id.featured1);
+        farticle1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(HomeActivity.this, Article.class));
             }
         });
     }

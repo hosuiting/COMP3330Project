@@ -26,43 +26,39 @@
                 android:layout_width="match_parent"
                 android:layout_height="800dp">
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
+                <EditText
+                    android:id="@+id/search_bar"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/search"
+                    android:drawableStart="@drawable/search"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:hint="Search for article"
+                    android:inputType="textPersonName"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/SearchBtn"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/calories_burned"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/encouraging_msg"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/article_text">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/imageView10"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/fruits" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/imageView9"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/carbohydrates1" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </HorizontalScrollView>
+                    android:layout_marginTop="8dp"
+                    android:text="A year from now you may wish you had started today."
+                    android:textColor="#D12D2D"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/middle_picture" />
 
                 <HorizontalScrollView
                     android:id="@+id/horizontalScrollView2"
@@ -189,39 +185,99 @@
                     </LinearLayout>
                 </HorizontalScrollView>
 
-                <TextView
-                    android:id="@+id/encouraging_msg"
-                    android:layout_width="wrap_content"
+                <HorizontalScrollView
+                    android:id="@+id/horizontalScrollView3"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="A year from now you may wish you had started today."
-                    android:textColor="#D12D2D"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/middle_picture" />
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="none"
+                    app:layout_constraintTop_toBottomOf="@+id/article_text">
 
-                <EditText
-                    android:id="@+id/search_bar"
-                    android:layout_width="200dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/search"
-                    android:drawableStart="@drawable/search"
-                    android:drawablePadding="10dp"
-                    android:ems="10"
-                    android:hint="Search for article"
-                    android:inputType="textPersonName"
-                    android:textSize="14sp"
-                    android:textStyle="italic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/SearchBtn"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/calories_burned"
-                    app:layout_constraintVertical_bias="0.0" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/featured1"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/fthumbnail1"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                app:srcCompat="@drawable/thumbnail_protein" />
+
+                            <TextView
+                                android:id="@+id/ftitle1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:gravity="left"
+                                android:text="Best Sources of Protein"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/featured2"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/fthumbnail2"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                app:srcCompat="@drawable/thumbnail_plank" />
+
+                            <TextView
+                                android:id="@+id/ftitle2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:gravity="left"
+                                android:text="How to Do the Perfect Plank"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/featured3"
+                            android:layout_width="140dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <ImageView
+                                android:id="@+id/fthumbnail3"
+                                android:layout_width="match_parent"
+                                android:layout_height="70dp"
+                                app:srcCompat="@drawable/thumbnail_fruits" />
+
+                            <TextView
+                                android:id="@+id/ftitle3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:gravity="left"
+                                android:text="Myth: Fruit Contains Too Much Sugar"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
 
                 <TextView
                     android:id="@+id/calories_burned"
@@ -317,7 +373,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:text="Popular Articles"
+                    android:text="Featured Articles"
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="bold"
