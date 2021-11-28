@@ -43,10 +43,10 @@ public class Article extends AppCompatActivity {
         ((TextView) findViewById(R.id.article_details)).setText(dates);
         ((TextView) findViewById(R.id.article_content)).setText(content);
         button_like = findViewById(R.id.button_like);
+        button_like.setBackgroundResource(R.drawable.heart_before_like);
 
 
         button_like.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 liked = !liked;

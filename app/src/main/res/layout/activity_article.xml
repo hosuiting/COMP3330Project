@@ -62,14 +62,9 @@
                     android:layout_height="29dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    tools:srcCompat="@drawable/heart_before_like" />
+                    tools:src="@drawable/heart_before_like" />
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:orientation="vertical"></LinearLayout>
 
 
             <LinearLayout
