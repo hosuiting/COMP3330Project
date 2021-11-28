@@ -189,7 +189,7 @@ public class BodyMainFragment extends Fragment {
             fatBox.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             layout.addView(fatBox, layoutParams);
 
-            dialog.setView(layout); // Again this is a set method, not add
+            dialog.setView(layout);
             dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -252,7 +252,7 @@ public class BodyMainFragment extends Fragment {
 
                 layout.addView(fromDate, layoutParams);
                 layout.addView(toDate, layoutParams);
-                dialog.setView(layout); // Again this is a set method, not add
+                dialog.setView(layout);
                 dialog.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -273,7 +273,7 @@ public class BodyMainFragment extends Fragment {
 
                     }
                 });
-                dialog.setNegativeButton("Cancel   ", new DialogInterface.OnClickListener() {
+                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();

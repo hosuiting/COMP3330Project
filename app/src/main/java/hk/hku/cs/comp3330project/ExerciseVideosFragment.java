@@ -1,6 +1,8 @@
 package hk.hku.cs.comp3330project;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.camera.core.Camera;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.Preview;
@@ -29,12 +32,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -46,7 +52,7 @@ public class ExerciseVideosFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "btnValue";
-    private String[] gifNameArray;
+    private String currentExerciseName;
 
     private int btnValue;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
@@ -61,6 +67,7 @@ public class ExerciseVideosFragment extends Fragment {
     private CountDownTimer timer;
     private File savedFile;
     private int seekTime;
+    private ExerciseTipsSQLiteHelper sqliteHelper;
 
     public ExerciseVideosFragment() {
         // Required empty public constructor
@@ -71,8 +78,6 @@ public class ExerciseVideosFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             btnValue = getArguments().getInt(ARG_PARAM1);
-            gifNameArray = new String[] {"crab_toe_touch", "good_morning", "high_knees_poses", "inchworm", "leg_pull_in",
-                    "lunge_with_twist", "russian_twist", "side_lunge", "spiderman_exercise", "narrow_push_up"};
 //            testField.setText(Integer.toString(mParam1));
 
 //            GifDrawable gif = new GifDrawable()
@@ -80,7 +85,9 @@ public class ExerciseVideosFragment extends Fragment {
             Toast.makeText(getActivity(), "null", Toast.LENGTH_LONG).show();
         }
         btnState = 0;
-
+        if (sqliteHelper == null) {
+            sqliteHelper = new ExerciseTipsSQLiteHelper(getActivity());
+        }
 //        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
 //            @SuppressLint("RestrictedApi")
 //            @Override
@@ -107,6 +114,51 @@ public class ExerciseVideosFragment extends Fragment {
         previewView = view.findViewById(R.id.preview_view);
         playback_view = view.findViewById(R.id.playback_view);
         playback_view.setVisibility(View.GONE);
+        ((Button) view.findViewById(R.id.button5)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getActivity();
+                ArrayList<String> tips = sqliteHelper.getAllTip(btnValue);
+                System.out.println(tips.size());
+                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                dialog.setTitle("Workout Tips");
+
+                LinearLayout layout = new LinearLayout(context);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.setMargins(70, 15, 70, 0);
+
+
+                int tipsNum = 1;
+                for (String tip : tips) {
+                    LinearLayout tipsRow = new LinearLayout(context);
+                    tipsRow.setOrientation(LinearLayout.HORIZONTAL);
+
+                    TextView aTipText = new TextView(context);
+                    aTipText.setText(tip);
+
+                    TextView no = new TextView(context);
+                    no.setText(Integer.toString(tipsNum++)+". ");
+                    tipsRow.addView(no);
+                    tipsRow.addView(aTipText);
+
+                    layout.addView(tipsRow, layoutParams);
+
+                }
+
+                dialog.setView(layout);
+                dialog.setNegativeButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                dialog.show();
+
+            }
+        });
 //        previewView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -232,9 +284,12 @@ public class ExerciseVideosFragment extends Fragment {
         if ((GifImageView) view.findViewById(R.id.gifImageView) == null) {
             Toast.makeText(getActivity(), "Cannot find gif view!", Toast.LENGTH_SHORT).show();
         } else {
-            ((GifImageView) view.findViewById(R.id.gifImageView)).setImageResource(getResources().getIdentifier(gifNameArray[btnValue], "drawable", "hk.hku.cs.comp3330project"));
+            String[] gifNameArray = new String[] {"crab_toe_touch", "good_morning", "high_knees_poses", "inchworm", "leg_pull_in",
+                    "lunge_with_twist", "russian_twist", "side_lunge", "spiderman_exercise", "narrow_push_up"};
+            currentExerciseName = gifNameArray[btnValue];
+            ((GifImageView) view.findViewById(R.id.gifImageView)).setImageResource(getResources().getIdentifier(currentExerciseName, "drawable", "hk.hku.cs.comp3330project"));
         }
-        ((TextView) view.findViewById(R.id.textView4)).setText(formatToHeading(gifNameArray[btnValue]));
+        ((TextView) view.findViewById(R.id.textView4)).setText(formatToHeading(currentExerciseName));
 
         TimerTextView = (TextView) view.findViewById(R.id.textView5);
         return view;
@@ -261,7 +316,7 @@ public class ExerciseVideosFragment extends Fragment {
     @SuppressLint("RestrictedApi")
     private void recordVideo() {
         if (videoCapture != null) {
-            String name = "Exercise-recording-" +
+            String name = currentExerciseName+"-recording-" +
                     (new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss.SSS"))
                             .format(System.currentTimeMillis()) + ".mp4";
             File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
@@ -271,14 +326,13 @@ public class ExerciseVideosFragment extends Fragment {
                 movieDir.mkdir();
 
             final File videoFile = new File(movieDir, name);
-            Toast.makeText(getActivity(), videoFile.toString(), Toast.LENGTH_SHORT).show();
             videoCapture.startRecording(
                     new VideoCapture.OutputFileOptions.Builder(videoFile).build(),
                     getActivity().getMainExecutor(),
                     new VideoCapture.OnVideoSavedCallback() {
                         @Override
                         public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
-                            Toast.makeText(getActivity(), "Video saved", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Video saved to "+videoFile.toString(), Toast.LENGTH_LONG).show();
                             savedFile = videoFile;
                             previewView.setVisibility(View.GONE);
                             playback_view.setVisibility(View.VISIBLE);
@@ -313,6 +367,9 @@ public class ExerciseVideosFragment extends Fragment {
         if (videoCapture != null) {
             videoCapture.stopRecording();
             cameraProvider.unbindAll();
+        }
+        if (sqliteHelper != null) {
+            sqliteHelper.close();
         }
     }
 }
