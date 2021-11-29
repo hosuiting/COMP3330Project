@@ -126,7 +126,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         farticle1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //String name = "Best Sources of Protein";
+                //connect(name);
                 startActivity(new Intent(HomeActivity.this, Article.class));
             }
         });
