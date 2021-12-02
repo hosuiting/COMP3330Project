@@ -29,7 +29,7 @@
             <TextView
                 android:id="@+id/textView_articleTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:gravity="center"
                 android:text="Article Title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -48,17 +48,28 @@
 
                 <TextView
                     android:id="@+id/article_details"
-                    android:layout_width="306dp"
+                    android:layout_width="192dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
+                    android:textSize="15sp"
                     android:text="Year / Reading time / Likes" />
+
+                <TextView
+                    android:id="@+id/article_likes"
+                    android:layout_width="72dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:paddingRight = "3dp"
+                    android:textSize="15sp"
+                    android:text="Likes" />
 
                 <ImageView
                     android:id="@+id/button_like"
-                    android:layout_width="1dp"
+                    android:layout_width="9dp"
                     android:layout_height="29dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"

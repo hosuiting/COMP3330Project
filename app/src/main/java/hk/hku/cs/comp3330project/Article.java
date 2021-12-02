@@ -20,6 +20,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.navigation.NavigationBarView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -32,6 +36,7 @@ import java.util.concurrent.Executors;
 public class Article extends AppCompatActivity implements View.OnClickListener {
     boolean liked = false;
     String title, date;
+    Integer likes = 0;
 
     public Article() {
 
@@ -43,26 +48,37 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView button_like;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
         Intent intent = this.getIntent();
+        likes = intent.getIntExtra("likes",0);
         String titles = intent.getStringExtra("title");
         title = titles;
-        String dates = intent.getStringExtra("date");
+        String dates = "Publish Date: " + intent.getStringExtra("date");
         String content = intent.getStringExtra("content");
         String tag = intent.getStringExtra("tag");
         System.out.println(content);
         ((TextView) findViewById(R.id.textView_articleTitle)).setText(titles);
         ((TextView) findViewById(R.id.article_details)).setText(dates);
         ((TextView) findViewById(R.id.article_content)).setText(content);
+        ((TextView) findViewById(R.id.article_likes)).setText(likes + " likes");
         Chip chip = findViewById(R.id.chip_1);
         chip.setText(tag);
         button_like = findViewById(R.id.button_like);
         button_like.setBackgroundResource(R.drawable.heart_before_like);
         button_like.setOnClickListener(this);
+
+        chip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tag_connect(tag);
+            }
+        });
+
 
         ((BottomNavigationView) findViewById(R.id.menu)).setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -91,15 +107,18 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         liked = !liked;
         if (liked) {
             button_like.setBackgroundResource(R.drawable.heart_after_like);
-            connect(name,liked);
+            likes++;
+            connect(liked);
 
         } else {
             button_like.setBackgroundResource(R.drawable.heart_before_like);
-            connect(name,liked);
+            likes--;
+            connect(liked);
         }
+        ((TextView) findViewById(R.id.article_likes)).setText(likes + " likes");
     }
 
-    public void connect(String name, boolean liked){
+    public void connect(boolean liked){
         final ProgressDialog pdialog = new ProgressDialog(this);
 
         pdialog.setCancelable(false);
@@ -113,7 +132,48 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         else {
             url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=unlike&query=" + android.net.Uri.encode(title, "UTF-8");
         }
-        Toast.makeText(Article.this, url.toString(), Toast.LENGTH_LONG).show();
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        final Handler handler = new Handler(Looper.getMainLooper());
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                boolean success = true;
+                pdialog.setMessage("Before ...");
+                pdialog.show();
+                final String jsonString = getJsonPage(url);
+                System.out.println(jsonString);
+                if (jsonString.equals("Fail to login"))
+                    success = false;
+                final boolean finalSuccess = success;
+                String likemsg;
+                if (liked) likemsg = "Liked.";
+                else likemsg = "Unliked.";
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (finalSuccess) {
+                            Toast.makeText(Article.this,likemsg,Toast.LENGTH_SHORT).show();
+                        } else {
+                            alert( "Error", "Fail to connect" );
+                        }
+                        pdialog.hide();
+                    }
+                });
+            }
+        });
+
+    }
+
+    public void tag_connect(String tag){
+        final ProgressDialog pdialog = new ProgressDialog(this);
+
+        pdialog.setCancelable(false);
+        pdialog.setMessage("Connecting ...");
+        pdialog.show();
+        final String url;
+
+        url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=tag&query=" + android.net.Uri.encode(tag, "UTF-8");
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
@@ -132,7 +192,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
                     @Override
                     public void run() {
                         if (finalSuccess) {
-                            Toast.makeText(Article.this,"Liked.",Toast.LENGTH_LONG).show();
+                            parse_JSON_String_and_Switch_Activity(jsonString);
                         } else {
                             alert( "Error", "Fail to connect" );
                         }
@@ -183,6 +243,38 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
             }
         } while (true);
         return new String(htmlBuffer);
+    }
+
+    public void parse_JSON_String_and_Switch_Activity(String JSONString) {
+        ArrayList<String> title = new ArrayList<String>();
+//                ArrayList<String> thumbnail = new ArrayList<String>();
+        ArrayList<String> date = new ArrayList<String>();
+        ArrayList<String> content = new ArrayList<String>();
+        ArrayList<String> images = new ArrayList<String>();
+        ArrayList<String> tags = new ArrayList<String>();
+
+        try {
+            JSONObject rootJSONObj = new JSONObject(JSONString);
+            JSONArray article = rootJSONObj.getJSONArray("article");
+            for (int i = 0; i < article.length(); ++i) {
+                JSONObject object = article.getJSONObject(i);
+                title.add(object.getString("title"));
+                date.add(object.getString("date"));
+                content.add(object.getString("content"));
+                images.add(object.getString("image"));
+                tags.add(object.getString("tag"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Intent intent = new Intent(getBaseContext(), ArticleSearchResultsActivity.class);
+        intent.putStringArrayListExtra("title", title);
+        intent.putStringArrayListExtra("date", date);
+        intent.putStringArrayListExtra("content", content);
+        intent.putStringArrayListExtra("images", images);
+        intent.putStringArrayListExtra("tags",tags);
+        startActivity(intent);
     }
 
     protected void alert(String title, String mymessage){

@@ -201,6 +201,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         ArrayList<String> content = new ArrayList<String>();
         ArrayList<String> images = new ArrayList<String>();
         ArrayList<String> tags = new ArrayList<String>();
+        ArrayList<Integer> likes = new ArrayList<Integer>();
 
         try {
             JSONObject rootJSONObj = new JSONObject(JSONString);
@@ -212,6 +213,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 content.add(object.getString("content"));
                 images.add(object.getString("image"));
                 tags.add(object.getString("tag"));
+                likes.add(object.getInt("likes"));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -223,6 +225,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         intent.putStringArrayListExtra("content", content);
         intent.putStringArrayListExtra("images", images);
         intent.putStringArrayListExtra("tags",tags);
+        intent.putExtra("likes",likes);
         startActivity(intent);
     }
 
