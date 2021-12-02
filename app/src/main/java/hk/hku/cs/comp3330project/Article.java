@@ -10,12 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.BufferedReader;
@@ -50,10 +52,13 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         String titles = intent.getStringExtra("title");
         String dates = intent.getStringExtra("date");
         String content = intent.getStringExtra("content");
+        String tag = intent.getStringExtra("tag");
         System.out.println(content);
         ((TextView) findViewById(R.id.textView_articleTitle)).setText(titles);
         ((TextView) findViewById(R.id.article_details)).setText(dates);
         ((TextView) findViewById(R.id.article_content)).setText(content);
+        Chip chip = findViewById(R.id.chip_1);
+        chip.setText(tag);
         button_like = findViewById(R.id.button_like);
         button_like.setBackgroundResource(R.drawable.heart_before_like);
         button_like.setOnClickListener(this);
@@ -124,7 +129,9 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (finalSuccess == false) {
+                        if (finalSuccess) {
+                            Toast.makeText(Article.this,"Liked.",Toast.LENGTH_LONG).show();
+                        } else {
                             alert( "Error", "Fail to connect" );
                         }
                         pdialog.hide();
