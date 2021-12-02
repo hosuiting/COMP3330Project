@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -103,6 +104,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
 
         if (liked) {
             url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=like&query=" + android.net.Uri.encode(name, "UTF-8");
+            Toast.makeText(Article.this, url, Toast.LENGTH_LONG).show();
         }
         else {
             url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=unlike&query=" + android.net.Uri.encode(name, "UTF-8");
