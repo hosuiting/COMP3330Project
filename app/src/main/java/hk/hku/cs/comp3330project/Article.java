@@ -50,6 +50,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
 
         Intent intent = this.getIntent();
         String titles = intent.getStringExtra("title");
+        title = titles;
         String dates = intent.getStringExtra("date");
         String content = intent.getStringExtra("content");
         String tag = intent.getStringExtra("tag");
@@ -98,7 +99,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    public void connect(final String name, boolean liked){
+    public void connect(String name, boolean liked){
         final ProgressDialog pdialog = new ProgressDialog(this);
 
         pdialog.setCancelable(false);
@@ -107,11 +108,12 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         final String url;
 
         if (liked) {
-            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=like&query=" + android.net.Uri.encode(name, "UTF-8");
+            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=like&query=" + android.net.Uri.encode(title, "UTF-8");
         }
         else {
-            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=unlike&query=" + android.net.Uri.encode(name, "UTF-8");
+            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=unlike&query=" + android.net.Uri.encode(title, "UTF-8");
         }
+        Toast.makeText(Article.this, url.toString(), Toast.LENGTH_LONG).show();
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
