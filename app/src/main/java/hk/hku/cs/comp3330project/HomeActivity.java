@@ -200,19 +200,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         ArrayList<String> date = new ArrayList<String>();
         ArrayList<String> content = new ArrayList<String>();
         ArrayList<String> images = new ArrayList<String>();
+        ArrayList<String> tags = new ArrayList<String>();
 
         try {
             JSONObject rootJSONObj = new JSONObject(JSONString);
             JSONArray article = rootJSONObj.getJSONArray("article");
-            if (article.length() < 1) {
-                Toast.makeText(this, "No articles that match the keyword.", Toast.LENGTH_LONG);
-            }
             for (int i = 0; i < article.length(); ++i) {
                 JSONObject object = article.getJSONObject(i);
                 title.add(object.getString("title"));
                 date.add(object.getString("date"));
                 content.add(object.getString("content"));
                 images.add(object.getString("image"));
+                tags.add(object.getString("tag"));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -223,6 +222,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         intent.putStringArrayListExtra("date", date);
         intent.putStringArrayListExtra("content", content);
         intent.putStringArrayListExtra("images", images);
+        intent.putStringArrayListExtra("tags",tags);
         startActivity(intent);
     }
 
