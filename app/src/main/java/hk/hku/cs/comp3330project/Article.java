@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.chip.Chip;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.BufferedReader;
@@ -49,12 +50,16 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
 
         Intent intent = this.getIntent();
         String titles = intent.getStringExtra("title");
+        title = titles;
         String dates = intent.getStringExtra("date");
         String content = intent.getStringExtra("content");
+        String tag = intent.getStringExtra("tag");
         System.out.println(content);
         ((TextView) findViewById(R.id.textView_articleTitle)).setText(titles);
         ((TextView) findViewById(R.id.article_details)).setText(dates);
         ((TextView) findViewById(R.id.article_content)).setText(content);
+        Chip chip = findViewById(R.id.chip_1);
+        chip.setText(tag);
         button_like = findViewById(R.id.button_like);
         button_like.setBackgroundResource(R.drawable.heart_before_like);
         button_like.setOnClickListener(this);
@@ -94,7 +99,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    public void connect(final String name, boolean liked){
+    public void connect(String name, boolean liked){
         final ProgressDialog pdialog = new ProgressDialog(this);
 
         pdialog.setCancelable(false);
@@ -103,12 +108,12 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         final String url;
 
         if (liked) {
-            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=like&query=" + android.net.Uri.encode(name, "UTF-8");
-            Toast.makeText(Article.this, url, Toast.LENGTH_LONG).show();
+            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=like&query=" + android.net.Uri.encode(title, "UTF-8");
         }
         else {
-            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=unlike&query=" + android.net.Uri.encode(name, "UTF-8");
+            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=unlike&query=" + android.net.Uri.encode(title, "UTF-8");
         }
+        Toast.makeText(Article.this, url.toString(), Toast.LENGTH_LONG).show();
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
@@ -126,7 +131,9 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (finalSuccess == false) {
+                        if (finalSuccess) {
+                            Toast.makeText(Article.this,"Liked.",Toast.LENGTH_LONG).show();
+                        } else {
                             alert( "Error", "Fail to connect" );
                         }
                         pdialog.hide();
