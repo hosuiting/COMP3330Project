@@ -37,7 +37,7 @@ public class ListAdapter extends ArrayAdapter<Article>{
 
         title.setText(article.title);
         date.setText(article.date);
-        String image = "@drawable/" + article.image;
+        String image = "@drawable/" + article.images;
 
         int imageResource = context.getResources().getIdentifier(image, null, context.getPackageName());
         ImageView imageView = convertView.findViewById(R.id.profile_pic);

@@ -35,7 +35,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Article extends AppCompatActivity implements View.OnClickListener {
-    String image;
     boolean liked = false;
     String title, date;
     Integer likes = 0;
@@ -43,10 +42,9 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
     public Article() {
 
     }
-    public Article(String title, String date, String image) {
+    public Article(String title, String date) {
         this.title = title;
         this.date = date;
-        this.image = image;
     }
 
     private ImageView button_like;
