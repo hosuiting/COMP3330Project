@@ -32,7 +32,6 @@ public class ArticleSearchResultsActivity extends ListActivity {
         ArrayList<String> dates = intent.getStringArrayListExtra("date");
         ArrayList<String> content = intent.getStringArrayListExtra("content");
         ArrayList<String> images = intent.getStringArrayListExtra("images");
-        ArrayList<String> tags = intent.getStringArrayListExtra("tags");
 
         if (titles != null) {
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!Entered loop");
@@ -68,7 +67,6 @@ public class ArticleSearchResultsActivity extends ListActivity {
                 intent.putExtra("date", dates.get(position));
                 intent.putExtra("content", content.get(position));
                 intent.putExtra("image",images.get(position));
-                intent.putExtra("tag",tags.get(position));
                 startActivity(intent);
 
                 // When clicked, show a toast with the TextView text
