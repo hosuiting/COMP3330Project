@@ -56,7 +56,7 @@ public class ArticleSearchResultsActivity extends ListActivity {
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!Didn't enter loop");
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"title", "date"}, new int[]{R.id.articletitle, R.id.date});
+        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"title", "date", "image"}, new int[]{R.id.articletitle, R.id.date, R.id.profile_pic});
         setListAdapter(adapter);
 
         ListView lv = getListView();
