@@ -47,7 +47,9 @@ public class ArticleSearchResultsActivity extends ListActivity {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("title", titles.get(i));
                 map.put("date", dates.get(i));
-                map.put("image",R.drawable.fruits);
+                String image = "@drawable/" + images.get(i);
+                int imageResource = getResources().getIdentifier(image, null, getPackageName());
+                map.put("image",imageResource);
 
                 list.add(map);
             }
@@ -59,7 +61,6 @@ public class ArticleSearchResultsActivity extends ListActivity {
         SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"title", "date", "image"}, new int[]{R.id.articletitle, R.id.date, R.id.profile_pic});
         setListAdapter(adapter);
 
-        ListAdapter listAdapter = new ListAdapter(this,R.layout.list_item,list);
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
