@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +38,6 @@ public class ArticleSearchResultsActivity extends ListActivity {
 
         if (titles != null) {
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!Entered loop");
-            System.out.println(titles.size());
             if (titles.size() == 0) {
                 Toast.makeText(this, "No articles matching that keyword", Toast.LENGTH_LONG).show();
                 Intent returnintent = new Intent(getBaseContext(), HomeActivity.class);
@@ -47,7 +47,7 @@ public class ArticleSearchResultsActivity extends ListActivity {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("title", titles.get(i));
                 map.put("date", dates.get(i));
-                map.put("image",images.get(i));
+                map.put("image",R.drawable.fruits);
 
                 list.add(map);
             }
@@ -56,8 +56,10 @@ public class ArticleSearchResultsActivity extends ListActivity {
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!Didn't enter loop");
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"title", "date"}, new int[]{R.id.articletitle, R.id.date});
+        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"title", "date", "image"}, new int[]{R.id.articletitle, R.id.date, R.id.profile_pic});
         setListAdapter(adapter);
+
+        ListAdapter listAdapter = new ListAdapter(this,R.layout.list_item,list);
 
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);

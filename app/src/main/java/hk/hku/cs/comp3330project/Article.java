@@ -38,13 +38,16 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
     boolean liked = false;
     String title, date;
     Integer likes = 0;
+    String image;
 
     public Article() {
 
     }
-    public Article(String title, String date) {
+    public Article(String title, String date, String image) {
         this.title = title;
         this.date = date;
+        this.image = image;
+
     }
 
     private ImageView button_like;
@@ -178,7 +181,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
         pdialog.show();
         final String url;
 
-        url = "https://i7.cs.hku.hk/~cyjluk/comp3330/like.php?action=tag&query=" + android.net.Uri.encode(tag, "UTF-8");
+        url = "https://i7.cs.hku.hk/~cyjluk/comp3330/tag.php?action=search&query=" + android.net.Uri.encode(tag, "UTF-8");
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
