@@ -24,7 +24,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="800dp">
+                android:layout_height="900dp">
 
                 <LinearLayout
                     android:id="@+id/linearLayout3"
@@ -207,81 +207,12 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:id="@+id/featured1"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/fthumbnail1"
-                                android:layout_width="match_parent"
-                                android:layout_height="70dp"
-                                app:srcCompat="@drawable/thumbnail_protein" />
-
-                            <TextView
-                                android:id="@+id/ftitle1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-condensed-medium"
-                                android:gravity="left"
-                                android:text="Best Sources of Protein"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/featured2"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/fthumbnail2"
-                                android:layout_width="match_parent"
-                                android:layout_height="70dp"
-                                app:srcCompat="@drawable/thumbnail_plank" />
-
-                            <TextView
-                                android:id="@+id/ftitle2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-condensed-medium"
-                                android:gravity="left"
-                                android:text="How to Do the Perfect Plank"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/featured3"
-                            android:layout_width="140dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:id="@+id/fthumbnail3"
-                                android:layout_width="match_parent"
-                                android:layout_height="70dp"
-                                app:srcCompat="@drawable/thumbnail_fruits" />
-
-                            <TextView
-                                android:id="@+id/ftitle3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="sans-serif-condensed-medium"
-                                android:gravity="left"
-                                android:text="Myth: Fruit Contains Too Much Sugar"
-                                android:textColor="@color/black"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="10dp"
+                            android:orientation="horizontal" />
                     </LinearLayout>
                 </HorizontalScrollView>
 

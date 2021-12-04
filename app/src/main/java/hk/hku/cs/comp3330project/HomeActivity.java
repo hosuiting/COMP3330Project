@@ -1,8 +1,12 @@
 package hk.hku.cs.comp3330project;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -12,6 +16,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -120,17 +125,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //Featured articles button
-        //Intent intent = this.getIntent();
-        farticle1 = (LinearLayout) findViewById(R.id.featured1);
-        farticle1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //String name = "Best Sources of Protein";
-                //connect(name);
-                startActivity(new Intent(HomeActivity.this, Article.class));
-            }
-        });
+        connect("featured_art", "of");
+
     }
 
     @Override
@@ -140,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             if (name == "") {
                 return;
             }
-            connect(name);
+            connect("search", name);
         }
     }
 
@@ -194,7 +190,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 .show();
     }
 
-    public void parse_JSON_String_and_Switch_Activity(String JSONString) {
+    public void parse_JSON_String_and_Switch_Activity(String JSONString, String function) {
         ArrayList<String> title = new ArrayList<String>();
 //                ArrayList<String> thumbnail = new ArrayList<String>();
         ArrayList<String> date = new ArrayList<String>();
@@ -219,34 +215,49 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
 
-        Intent intent = new Intent(getBaseContext(), ArticleSearchResultsActivity.class);
-        intent.putStringArrayListExtra("title", title);
-        intent.putStringArrayListExtra("date", date);
-        intent.putStringArrayListExtra("content", content);
-        intent.putStringArrayListExtra("images", images);
-        intent.putStringArrayListExtra("tags",tags);
-        intent.putExtra("likes",likes);
-        startActivity(intent);
+        if (function == "search") {
+            Intent intent = new Intent(getBaseContext(), ArticleSearchResultsActivity.class);
+            intent.putStringArrayListExtra("title", title);
+            intent.putStringArrayListExtra("date", date);
+            intent.putStringArrayListExtra("content", content);
+            intent.putStringArrayListExtra("images", images);
+            intent.putStringArrayListExtra("tags",tags);
+            intent.putExtra("likes",likes);
+            startActivity(intent);
+        }
+
+        if (function == "featured_art") {
+            Log.d(TAG, "initRecyclerView: init recyclerview");
+            System.out.println("Featured article section");
+
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            RecyclerView recyclerView = findViewById(R.id.recyclerView);
+            recyclerView.setLayoutManager(layoutManager);
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, title, date, content, images, tags, likes);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
-    public void connect(final String name){
+    public void connect(String function, final String name){
         final ProgressDialog pdialog = new ProgressDialog(this);
+        String url = null;
 
         pdialog.setCancelable(false);
         pdialog.setMessage("Connecting ...");
         pdialog.show();
 
+        url = "https://i.cs.hku.hk/~stho/comp3330/articleSearch.php?action=search&query=" + android.net.Uri.encode(name, "UTF-8");
 
-        final String url = "https://i.cs.hku.hk/~stho/comp3330/articleSearch.php?action=search&query=" + android.net.Uri.encode(name, "UTF-8");
         ExecutorService executor = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
+        String finalUrl = url;
         executor.execute(new Runnable() {
             @Override
             public void run() {
                 boolean success = true;
                 pdialog.setMessage("Before ...");
                 pdialog.show();
-                final String jsonString = getJsonPage(url);
+                final String jsonString = getJsonPage(finalUrl);
                 System.out.println(jsonString);
                 if (jsonString.equals("Fail to login"))
                     success = false;
@@ -255,7 +266,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void run() {
                         if (finalSuccess) {
-                            parse_JSON_String_and_Switch_Activity(jsonString);
+                            parse_JSON_String_and_Switch_Activity(jsonString, function);
                         } else {
                             alert( "Error", "Fail to connect" );
                         }
@@ -265,7 +276,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+
+
     }
+
+
+
 
 //        toExerciseSelect = findViewById(R.id.toExerciseSelect);
 //        toExerciseSelect.setOnClickListener(new View.OnClickListener() {

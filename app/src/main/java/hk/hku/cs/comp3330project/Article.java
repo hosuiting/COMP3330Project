@@ -43,15 +43,15 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
     public Article() {
 
     }
+
     public Article(String title, String date, String image) {
         this.title = title;
         this.date = date;
         this.image = image;
-
     }
 
-    private ImageView button_like;
 
+    private ImageView button_like;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
