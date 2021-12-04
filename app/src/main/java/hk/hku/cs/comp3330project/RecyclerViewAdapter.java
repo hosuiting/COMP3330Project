@@ -19,6 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
+    private OnNoteListener mOnNoteListener;
 
     //vars
     ArrayList<String> title = new ArrayList<String>();
@@ -29,8 +30,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     ArrayList<Integer> likes = new ArrayList<Integer>();
     private Context mContext;
 
-    public RecyclerViewAdapter(Context context, ArrayList<String> title, ArrayList<String> date, ArrayList<String> content, ArrayList<String> images, ArrayList<String> tags, ArrayList<Integer> likes) {
+    public RecyclerViewAdapter(Context context, ArrayList<String> title, ArrayList<String> date, ArrayList<String> content, ArrayList<String> images, ArrayList<String> tags, ArrayList<Integer> likes, OnNoteListener onNoteListener) {
         mContext = context;
+        this.mOnNoteListener = onNoteListener;
         this.title = title;
         this.date = date;
         this.content = content;
@@ -42,7 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_listitem, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, mOnNoteListener);
     }
 
     @Override
@@ -63,15 +65,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return title.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         CircleImageView image;
         TextView name;
+        OnNoteListener onNoteListener;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, OnNoteListener onNoteListener) {
             super(itemView);
             image = itemView.findViewById(R.id.image_view);
             name = itemView.findViewById(R.id.name);
+            this.onNoteListener = onNoteListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onNoteListener.onNoteClick(getBindingAdapterPosition());
+        }
+    }
+
+    public interface OnNoteListener{
+        void onNoteClick(int position);
     }
 }

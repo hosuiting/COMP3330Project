@@ -46,7 +46,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener{
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, RecyclerViewAdapter.OnNoteListener{
     private LinearLayout toCaloriesCal;
     private LinearLayout toExerciseSelect;
     private LinearLayout toChatroom;
@@ -55,6 +55,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private TextView Greet;
     private Button SearchBtn;
     private EditText search_bar;
+
+    ArrayList<String> ftitles = new ArrayList<String>();
+    ArrayList<String> fdates = new ArrayList<String>();
+    ArrayList<String> fcontent = new ArrayList<String>();
+    ArrayList<String> fimages = new ArrayList<String>();
+    ArrayList<String> ftags = new ArrayList<String>();
+    ArrayList<Integer> flikes = new ArrayList<Integer>();
 
 
     @Override
@@ -227,13 +234,29 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (function == "featured_art") {
+            try {
+                JSONObject rootJSONObj = new JSONObject(JSONString);
+                JSONArray article = rootJSONObj.getJSONArray("article");
+                for (int i = 0; i < article.length(); ++i) {
+                    JSONObject object = article.getJSONObject(i);
+                    ftitles.add(object.getString("title"));
+                    fdates.add(object.getString("date"));
+                    fcontent.add(object.getString("content"));
+                    fimages.add(object.getString("image"));
+                    ftags.add(object.getString("tag"));
+                    flikes.add(object.getInt("likes"));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             Log.d(TAG, "initRecyclerView: init recyclerview");
             System.out.println("Featured article section");
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             RecyclerView recyclerView = findViewById(R.id.recyclerView);
             recyclerView.setLayoutManager(layoutManager);
-            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, title, date, content, images, tags, likes);
+            RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, ftitles, fdates, fcontent, fimages, ftags, flikes, this);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -280,7 +303,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
+    @Override
+    public void onNoteClick(int position) {
+        Intent feat_intent = new Intent(this, Article.class);
+        feat_intent.putExtra("title", ftitles.get(position));
+        feat_intent.putExtra("date", fdates.get(position));
+        feat_intent.putExtra("content", fcontent.get(position));
+        feat_intent.putExtra("image",fimages.get(position));
+        feat_intent.putExtra("tag",ftags.get(position));
+        feat_intent.putExtra("likes", flikes.get(position));
+        startActivity(feat_intent);
+    }
 
 
 //        toExerciseSelect = findViewById(R.id.toExerciseSelect);
