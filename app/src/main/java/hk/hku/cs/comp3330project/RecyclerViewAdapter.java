@@ -17,7 +17,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-
     private static final String TAG = "RecyclerViewAdapter";
     private OnNoteListener mOnNoteListener;
 
@@ -52,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Log.d(TAG, "onBindViewHolder: called.");
 
         holder.name.setText(title.get(position));
-        String image = "@drawable/" + images.get(position);
+        String image = "@drawable/thumbnail_" + images.get(position);
         System.out.println(image);
         int imageResource = mContext.getResources().getIdentifier(image, null, mContext.getPackageName());
         holder.image.setImageResource(imageResource);

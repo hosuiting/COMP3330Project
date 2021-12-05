@@ -47,7 +47,7 @@ public class ArticleSearchResultsActivity extends ListActivity {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("title", titles.get(i));
                 map.put("date", dates.get(i));
-                String image = "@drawable/" + images.get(i);
+                String image = "@drawable/thumbnail_" + images.get(i);
                 int imageResource = getResources().getIdentifier(image, null, getPackageName());
                 map.put("image",imageResource);
 
