@@ -319,7 +319,7 @@ public class BodyMainFragment extends Fragment {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String formatDate = String.format("%d-%d-%d", year, month + 1, dayOfMonth);
+                String formatDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth);
 //                tvSelectDate.setText(formatDate);
 //                timePicker(formatDate);
 //                Toast.makeText(v.getContext(), formatDate, Toast.LENGTH_SHORT).show();
