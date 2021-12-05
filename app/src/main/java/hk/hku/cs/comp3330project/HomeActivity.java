@@ -132,7 +132,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        connect("featured_art", "of");
+        connect("featured_art", "");
 
     }
 
@@ -237,6 +237,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             try {
                 JSONObject rootJSONObj = new JSONObject(JSONString);
                 JSONArray article = rootJSONObj.getJSONArray("article");
+                System.out.println("Article length: " + article.length());
                 for (int i = 0; i < article.length(); ++i) {
                     JSONObject object = article.getJSONObject(i);
                     ftitles.add(object.getString("title"));
@@ -269,7 +270,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         pdialog.setMessage("Connecting ...");
         pdialog.show();
 
-        url = "https://i.cs.hku.hk/~stho/comp3330/articleSearch.php?action=search&query=" + android.net.Uri.encode(name, "UTF-8");
+        if (function == "search") {
+            url = "https://i.cs.hku.hk/~stho/comp3330/articleSearch.php?action=search&query=" + android.net.Uri.encode(name, "UTF-8");
+        }
+        else if (function == "featured_art") {
+            url = "https://i7.cs.hku.hk/~cyjluk/comp3330/featured.php?action=featured";
+        }
+
+
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         final Handler handler = new Handler(Looper.getMainLooper());
