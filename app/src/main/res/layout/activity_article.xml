@@ -80,13 +80,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipGroup"
-                    android:layout_width="match_parent"
+                    android:layout_width="318dp"
                     android:layout_height="wrap_content"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp">
@@ -102,6 +101,11 @@
 
                 </com.google.android.material.chip.ChipGroup>
 
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="91dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/christmas2" />
             </LinearLayout>
 
             <LinearLayout
