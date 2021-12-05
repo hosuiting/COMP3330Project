@@ -268,7 +268,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         pdialog.setCancelable(false);
         pdialog.setMessage("Connecting ...");
-        pdialog.show();
+        //pdialog.show();
 
         if (function == "search") {
             url = "https://i.cs.hku.hk/~stho/comp3330/articleSearch.php?action=search&query=" + android.net.Uri.encode(name, "UTF-8");
@@ -287,7 +287,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
                 boolean success = true;
                 pdialog.setMessage("Before ...");
-                pdialog.show();
+                //pdialog.show();
                 final String jsonString = getJsonPage(finalUrl);
                 System.out.println(jsonString);
                 if (jsonString.equals("Fail to login"))

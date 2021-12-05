@@ -131,7 +131,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
 
         pdialog.setCancelable(false);
         pdialog.setMessage("Connecting ...");
-        pdialog.show();
+        //pdialog.show();
         final String url;
 
         if (liked) {
@@ -147,17 +147,22 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void run() {
                 boolean success = true;
-
+                pdialog.setMessage("Before ...");
+                //pdialog.show();
                 final String jsonString = getJsonPage(url);
                 System.out.println(jsonString);
                 if (jsonString.equals("Fail to login"))
                     success = false;
                 final boolean finalSuccess = success;
-
+                String likemsg;
+                if (liked) likemsg = "Liked.";
+                else likemsg = "Unliked.";
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (!finalSuccess) {
+                        if (finalSuccess) {
+                            //Toast.makeText(Article.this,likemsg,Toast.LENGTH_SHORT).show();
+                        } else {
                             alert( "Error", "Fail to connect" );
                         }
                         pdialog.hide();
@@ -173,7 +178,7 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
 
         pdialog.setCancelable(false);
         pdialog.setMessage("Connecting ...");
-        pdialog.show();
+        //pdialog.show();
         final String url;
 
         url = "https://i7.cs.hku.hk/~cyjluk/comp3330/tag.php?action=search&query=" + android.net.Uri.encode(tag, "UTF-8");
@@ -184,7 +189,8 @@ public class Article extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void run() {
                 boolean success = true;
-
+                pdialog.setMessage("Before ...");
+                //pdialog.show();
                 final String jsonString = getJsonPage(url);
                 System.out.println(jsonString);
                 if (jsonString.equals("Fail to login"))
