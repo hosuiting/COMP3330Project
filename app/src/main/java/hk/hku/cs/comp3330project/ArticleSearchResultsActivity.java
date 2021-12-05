@@ -27,6 +27,8 @@ public class ArticleSearchResultsActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_article_search_results);
+        ListView lv = (ListView) findViewById(android.R.id.list);
 
         Intent intent = this.getIntent();
         ArrayList<String> titles = intent.getStringArrayListExtra("title");
@@ -59,10 +61,8 @@ public class ArticleSearchResultsActivity extends ListActivity {
         }
 
         SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.list_item, new String[]{"title", "date", "image"}, new int[]{R.id.articletitle, R.id.date, R.id.profile_pic});
-        setListAdapter(adapter);
+        lv.setAdapter(adapter);
 
-
-        ListView lv = getListView();
         lv.setTextFilterEnabled(true);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
